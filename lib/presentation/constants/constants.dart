@@ -27,6 +27,7 @@ class Constants {
     const Locale('de')
   ];
 
+// NYT API settings
   static Uri myBidderTermsOfServiceUrl =
       Uri.parse('https://www.myibidder.com/login/terms');
 
