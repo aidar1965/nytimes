@@ -1,0 +1,14 @@
+{
+    "locale": "EN",
+
+    "bottomNavigationNews": "News",
+    "bottomNavigationFavorites": "Favorites",
+
+    "screenNewsListTitle": "NY Times Latest Articles",
+    "screenNewsListCategory": "Category:",
+    "screenNewsListSearchLocally": "Search locally",
+    "screenNewsListSearchFilter": "Search filter",
+    "screenNewsListClearFilters": "Clear filters",
+
+    "screenFavoritesTitle": "Favorites"
+}
