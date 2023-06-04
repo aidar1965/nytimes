@@ -79,9 +79,9 @@ class Palette {
 
   static const appbarBackgroundDark = Color(0xFF1f1f1f);
 
-  static const textButtonShadow = Color(0x29AEAEAE29);
+  static const textButtonShadow = Color(0x29AEAEAE);
 
-  static const editFieldShadow = Color(0x16AEAEAEAE);
+  static const editFieldShadow = Color(0x16AEAEAE);
   static const disabledEditField = Color(0xffA8B8C1);
 
   static const accentButtonOverlay = Color(0xff044188);

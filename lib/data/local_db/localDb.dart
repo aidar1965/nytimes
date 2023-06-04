@@ -1,9 +1,10 @@
 import 'dart:developer';
 
 import 'package:isar/isar.dart';
+import 'package:path_provider/path_provider.dart';
+
 import 'package:nytimes/domain/models/article.dart';
 import 'package:nytimes/domain/models/favorite.dart';
-import 'package:path_provider/path_provider.dart';
 
 import '../../domain/interfaces/i_local_db.dart';
 
@@ -56,12 +57,9 @@ class LocalDb implements ILocalDb {
     var existingArticles = await _isar!.articles.where().findAll();
     for (var a in existingArticles) {
       await _isar?.writeTxn(() async {
-        final success = await _isar?.articles.delete(a.id);
+        await _isar?.articles.delete(a.id);
       });
     }
-    var testDeleteArticles =
-        await _isar!.articles.where().findAll(); // TODO убрать
-    log(testDeleteArticles.length.toString());
   }
 
   @override

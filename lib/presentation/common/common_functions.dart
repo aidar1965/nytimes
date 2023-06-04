@@ -5,7 +5,6 @@ import '../../data/api/models/section.dart';
 import 'widgets/common_dialog.dart';
 
 class CommonFunctions {
-  // Стандартное уведомление --------------------------------------------------
   static Future<void> showMessage(BuildContext context, String msg) =>
       showDialog<void>(
         context: context,
@@ -94,7 +93,7 @@ class CommonFunctions {
       case Section.Multimedia:
         return 'Multimedia';
       case Section.MultimediaOrPhotos:
-        return 'Multimedi/Photos';
+        return 'Multimedia/Photos';
       case Section.NYOrRegion:
         return 'N.Y./Region';
       case Section.NYRegion:

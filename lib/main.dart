@@ -1,17 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:io';
-import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_background_service/flutter_background_service.dart';
-import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:nytimes/domain/interfaces/i_favorites_repository.dart';
 import 'package:nytimes/domain/models/favorite.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:workmanager/workmanager.dart';
 import 'data/api/api.dart';
 import 'data/api/models/section.dart';

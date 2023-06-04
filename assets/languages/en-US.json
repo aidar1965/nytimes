@@ -1,5 +1,7 @@
 {
     "locale": "EN",
+    "error": "Error",
+    "ok": "Ok",
 
     "bottomNavigationArticles": "Articles",
     "bottomNavigationFavorites": "Favorites",

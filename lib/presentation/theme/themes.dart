@@ -59,7 +59,7 @@ class AppTheme {
           enableFeedback: false,
         ),
 
-        appBarTheme: AppBarTheme(backgroundColor: Palette.clean),
+        appBarTheme: const AppBarTheme(backgroundColor: Palette.clean),
 
         chipTheme:
             const ChipThemeData(backgroundColor: Palette.buttonLightPink),

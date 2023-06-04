@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dep_gen/dep_gen.dart';
@@ -127,7 +126,13 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
       } on RequestException catch (e) {
         if (e.httpStatusCode == 429) {
           emitter(
-              const NewsListState.error(errorText: 'Quota limit  exceeded'));
+            const NewsListState.error(errorText: 'Quota limit  exceeded'),
+          );
+          articles = await articlesRepository.getLocalArticles() ?? [];
+          emitter(NewsListState.dataReceived(
+            articles: articles,
+            isConnected: isConnected,
+          ));
         } else {
           articles = await articlesRepository.getLocalArticles() ?? [];
           emitter(NewsListState.dataReceived(
@@ -136,7 +141,7 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
           ));
         }
         rethrow;
-      } on Object catch (e) {
+      } on Object {
         emitter(const NewsListState.error(errorText: 'something went wrong'));
         rethrow;
       } finally {
@@ -188,7 +193,6 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
       await articlesRepository.clearLocalArticles();
       await articlesRepository.saveArticlesLocally(renewedArticlesList);
       final a = await articlesRepository.getLocalArticles();
-      log(a!.first.articleAbstract);
     }
   }
 

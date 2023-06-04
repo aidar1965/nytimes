@@ -48,8 +48,8 @@ class _NewsListScreenState extends State<NewsListScreen> {
         value: _bloc,
         child: BlocConsumer<NewsListBloc, NewsListState>(
           listener: (context, state) => state.mapOrNull(
-              error: (state) => CommonFunctions.showMessage(
-                  context, state.errorText!)), // TODO
+              error: (state) =>
+                  CommonFunctions.showMessage(context, state.errorText!)),
           buildWhen: (previous, current) => current.maybeMap(
               dataReceived: (_) => true,
               searchResult: (_) => true,
@@ -63,7 +63,6 @@ class _NewsListScreenState extends State<NewsListScreen> {
                     isPending: state.isPending,
                   ),
               searchResult: (state) => NewsListView(
-                    // TODO
                     articles: state.articles,
                     selectedSection: null,
                     isConnected: true,

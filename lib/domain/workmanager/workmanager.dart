@@ -75,6 +75,4 @@ void callbackDispatcher() {
   workManager.executeTask((task, inputData) async {
     return await workmanagerTask(task, inputData);
   });
-
-  //simpleTask will be emitted here.
 }

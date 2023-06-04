@@ -2,6 +2,8 @@
 
 abstract class  LocaleKeys {
   static const locale = 'locale';
+  static const error = 'error';
+  static const ok = 'ok';
   static const bottomNavigationArticles = 'bottomNavigationArticles';
   static const bottomNavigationFavorites = 'bottomNavigationFavorites';
   static const screenNewsListTitle = 'screenNewsListTitle';

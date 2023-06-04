@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nytimes/data/api/models/section.dart';
 
-import '../../../data/api/models/article_category.dart';
 import '../../../domain/environment/di.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../common/common_functions.dart';
