@@ -12,21 +12,24 @@ import 'models/section.dart';
 
 typedef _JsonObject = Map<String, dynamic>;
 
+/// implementing IApi for each request
+
 class Api implements IApi {
+  // Dio
   final DioClient httpClient = DioClient();
+  // class for converting responses to Dart objects
   final ApiDataMapper mapper = ApiDataMapper();
 
   @override
-  Future<PageArticles> getArticles(
-      {List<Section>? sections, int? page, Section? selectedSection}) async {
+  Future<PageArticles> getArticles({List<Section>? sections, int? page}) async {
     final response = await httpClient.request(RequestArticlesSearch(
       sections: sections,
       page: page,
-      section: selectedSection,
     ));
     return mapper.mapPageArticles(
       PageArticlesDto.fromJson(
-          jsonDecode('${response?.data}')['response'] as _JsonObject),
+        jsonDecode('${response?.data}')['response'] as _JsonObject,
+      ),
     );
   }
 }

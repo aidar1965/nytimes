@@ -1,15 +1,11 @@
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 
 import '../../../presentation/constants/constants.dart';
 import 'i_api_request.dart';
 import 'request_exception.dart';
 
-enum AvailableApiMethods { get, post, put, delete, patch }
-
+// http cliend with Dio
 class DioClient {
   // ---------------------------------------------------------------------------
   DioClient() {
@@ -23,9 +19,6 @@ class DioClient {
 
   static const String _baseUrl = '${Constants.hostHttp}://${Constants.hostUrl}';
 
-  // ---------------------------------------------------------------------------
-  // инициализация HTTP-клиента с заданными настройками
-  // и заголовком
   void _init() {
     _dioOptions = BaseOptions(
       baseUrl: _baseUrl,
@@ -38,7 +31,7 @@ class DioClient {
   // ---------------------------------------------------------------------------
   Future<Response<Object?>?> request(IApiRequest request) async {
     if (_dio == null) throw UnimplementedError('Dio is not initialized');
-    log(_dio!.options.headers.values.toString());
+
     final String url = '$_baseUrl${request.endPoint}';
     try {
       Response<String> response;
@@ -82,62 +75,64 @@ class DioClient {
         );
       }
 
-      Map<String, Object?>? responseBody;
-      String? responseValues;
-      if (dioError.response?.data != null) {
-        if ('${dioError.response?.data}'.isNotEmpty) {
-          final jsonDecoded = jsonDecode(dioError.response!.data as String);
-          if (jsonDecoded is Map) {
-            responseBody = jsonDecoded as Map<String, Object?>;
-          } else if (jsonDecoded is Iterable) {
-            responseBody = Map<String, String>.fromEntries(jsonDecoded
-                //ignore: avoid_types_on_closure_parameters
-                .map((Object? e) => MapEntry<String, String>('', '$e')));
-          }
+      throwRequestException(dioError, stackTrace);
+      rethrow;
+    }
+  }
 
-          if (responseBody != null) {
-            String errorText = '';
-            responseBody.forEach((key, value) {
-              if (value is String) {
-                errorText = '$errorText$value\n';
-              } else if (value is Map<String, Object?>) {
-                value.forEach((key, value) {
-                  if (value is String) {
-                    errorText = '$errorText$value\n';
-                  }
-                });
-              } else if (value is List<Object?>) {
-                for (var item in value) {
-                  errorText = '$errorText$item\n';
+  void throwRequestException(DioError de, StackTrace st) {
+    Map<String, Object?>? responseBody;
+    String? responseValues;
+    if (de.response?.data != null) {
+      if ('${de.response?.data}'.isNotEmpty) {
+        final jsonDecoded = jsonDecode(de.response!.data as String);
+        if (jsonDecoded is Map) {
+          responseBody = jsonDecoded as Map<String, Object?>;
+        } else if (jsonDecoded is Iterable) {
+          responseBody = Map<String, String>.fromEntries(jsonDecoded
+              //ignore: avoid_types_on_closure_parameters
+              .map((Object? e) => MapEntry<String, String>('', '$e')));
+        }
+
+        if (responseBody != null) {
+          String errorText = '';
+          responseBody.forEach((key, value) {
+            if (value is String) {
+              errorText = '$errorText$value\n';
+            } else if (value is Map<String, Object?>) {
+              value.forEach((key, value) {
+                if (value is String) {
+                  errorText = '$errorText$value\n';
                 }
+              });
+            } else if (value is List<Object?>) {
+              for (var item in value) {
+                errorText = '$errorText$item\n';
               }
-            });
-            if (errorText.isNotEmpty) {
-              responseValues = errorText.trim();
             }
+          });
+          if (errorText.isNotEmpty) {
+            responseValues = errorText.trim();
           }
         }
       }
-      Error.throwWithStackTrace(
-          RequestException(
-            httpStatusCode: dioError.response?.statusCode ?? 0,
-            response: responseBody,
-            responseValues: responseValues,
-            requestPath: dioError.requestOptions.path,
-            requestData: dioError.requestOptions.data,
-            requestMethod: dioError.requestOptions.method,
-          ),
-          stackTrace);
-    } on Object {
-      rethrow;
     }
+    Error.throwWithStackTrace(
+        RequestException(
+          httpStatusCode: de.response?.statusCode ?? 0,
+          response: responseBody,
+          responseValues: responseValues,
+          requestPath: de.requestOptions.path,
+          requestData: de.requestOptions.data,
+          requestMethod: de.requestOptions.method,
+        ),
+        st);
   }
 
   // ---------------------------------------------------------------------------
   void _logger(String url, Response? response,
       {Object? body, Object? queryParams}) {
     const logger = print;
-    // const logger = dev.log;
 
     logger('V___________________________________');
     logger(

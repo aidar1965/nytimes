@@ -10,7 +10,7 @@ class RequestGetArticlesByCategory extends IApiRequest {
     this.page,
   }) : super(
           methodType: AvailableApiMethods.get,
-          url: '$category.json',
+          endPoint: '$category.json',
         );
 
   final Category category;

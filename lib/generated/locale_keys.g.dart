@@ -2,7 +2,7 @@
 
 abstract class  LocaleKeys {
   static const locale = 'locale';
-  static const bottomNavigationNews = 'bottomNavigationNews';
+  static const bottomNavigationArticles = 'bottomNavigationArticles';
   static const bottomNavigationFavorites = 'bottomNavigationFavorites';
   static const screenNewsListTitle = 'screenNewsListTitle';
   static const screenNewsListCategory = 'screenNewsListCategory';

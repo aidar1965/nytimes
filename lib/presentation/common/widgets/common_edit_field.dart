@@ -283,7 +283,7 @@ class _CommonEditFieldState extends State<CommonEditField> {
                                 SizedBox.square(
                                   dimension: widget.height ==
                                           Constants.inputFieldDefaultHeight
-                                      ? 50
+                                      ? 40
                                       : widget.height,
                                   child: IconButton(
                                     padding: EdgeInsets.zero,

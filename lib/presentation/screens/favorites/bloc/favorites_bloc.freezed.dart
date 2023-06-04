@@ -110,10 +110,10 @@ class __$$_EventSectionSelectedOrUnselectedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? section = freezed,
+    Object? section = null,
   }) {
     return _then(_$_EventSectionSelectedOrUnselected(
-      section: freezed == section
+      section: null == section
           ? _value.section
           : section // ignore: cast_nullable_to_non_nullable
               as Section,
@@ -140,12 +140,11 @@ class _$_EventSectionSelectedOrUnselected
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_EventSectionSelectedOrUnselected &&
-            const DeepCollectionEquality().equals(other.section, section));
+            (identical(other.section, section) || other.section == section));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(section));
+  int get hashCode => Object.hash(runtimeType, section);
 
   @JsonKey(ignore: true)
   @override

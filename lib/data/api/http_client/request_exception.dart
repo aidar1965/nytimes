@@ -1,4 +1,4 @@
-// исключение, вызванное ошибкой при запросе к API
+// Exceptions caused by API requests
 class RequestException implements Exception {
   RequestException({
     required this.httpStatusCode,
@@ -8,9 +8,6 @@ class RequestException implements Exception {
     this.requestData,
     required this.requestMethod,
   });
-
-  // ---------------------------------------------------------------------------
-  static const String errorKey = 'Error';
 
   final int httpStatusCode;
   final Map<String, Object?>? response;

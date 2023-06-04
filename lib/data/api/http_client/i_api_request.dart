@@ -1,27 +1,21 @@
-import 'http_client.dart';
+enum AvailableApiMethods { get, post, put, delete, patch }
 
-// описание запроса к API
+/// abstract class used for extending for each api request
+
 abstract class IApiRequest {
   IApiRequest({
     required AvailableApiMethods methodType,
-    required String url,
-  })  : _initialUrl = url,
+    required String endPoint,
+  })  : _endPoint = endPoint,
         _methodType = methodType;
 
-  // приватные данные
   final AvailableApiMethods _methodType;
-  final String _initialUrl;
+  final String _endPoint;
 
-  // геттер, чтобы получить ссылку запроса
-  String get initialUrl => _initialUrl;
+  String get endPoint => _endPoint;
 
-  // геттер для оверрайта и преобразования ссылки к правильному эндпоинту
-  String get endPoint => _initialUrl;
-
-  // геттер для получения типа запроса
   AvailableApiMethods get methodType => _methodType;
 
-  // геттер для оверрайта тела запроса
   Map<String, Object?>? get body => null;
 
   Map<String, dynamic>? get queryParameters => null;

@@ -853,9 +853,8 @@ abstract class _EventConnectivityChanged implements NewsListEvent {
 mixin _$NewsListState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() pending,
-    required TResult Function(
-            List<Article> articles, Section? selectedSection, bool isConnected)
+    required TResult Function(List<Article> articles, Section? selectedSection,
+            bool isConnected, bool isPending)
         dataReceived,
     required TResult Function(String? errorText) error,
     required TResult Function(List<Article> articles) searchResult,
@@ -863,9 +862,8 @@ mixin _$NewsListState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? pending,
-    TResult? Function(
-            List<Article> articles, Section? selectedSection, bool isConnected)?
+    TResult? Function(List<Article> articles, Section? selectedSection,
+            bool isConnected, bool isPending)?
         dataReceived,
     TResult? Function(String? errorText)? error,
     TResult? Function(List<Article> articles)? searchResult,
@@ -873,9 +871,8 @@ mixin _$NewsListState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? pending,
-    TResult Function(
-            List<Article> articles, Section? selectedSection, bool isConnected)?
+    TResult Function(List<Article> articles, Section? selectedSection,
+            bool isConnected, bool isPending)?
         dataReceived,
     TResult Function(String? errorText)? error,
     TResult Function(List<Article> articles)? searchResult,
@@ -884,7 +881,6 @@ mixin _$NewsListState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_StatePending value) pending,
     required TResult Function(_StateDataReceived value) dataReceived,
     required TResult Function(_StateError value) error,
     required TResult Function(_StateSearchResult value) searchResult,
@@ -892,7 +888,6 @@ mixin _$NewsListState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_StatePending value)? pending,
     TResult? Function(_StateDataReceived value)? dataReceived,
     TResult? Function(_StateError value)? error,
     TResult? Function(_StateSearchResult value)? searchResult,
@@ -900,7 +895,6 @@ mixin _$NewsListState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_StatePending value)? pending,
     TResult Function(_StateDataReceived value)? dataReceived,
     TResult Function(_StateError value)? error,
     TResult Function(_StateSearchResult value)? searchResult,
@@ -928,133 +922,16 @@ class _$NewsListStateCopyWithImpl<$Res, $Val extends NewsListState>
 }
 
 /// @nodoc
-abstract class _$$_StatePendingCopyWith<$Res> {
-  factory _$$_StatePendingCopyWith(
-          _$_StatePending value, $Res Function(_$_StatePending) then) =
-      __$$_StatePendingCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_StatePendingCopyWithImpl<$Res>
-    extends _$NewsListStateCopyWithImpl<$Res, _$_StatePending>
-    implements _$$_StatePendingCopyWith<$Res> {
-  __$$_StatePendingCopyWithImpl(
-      _$_StatePending _value, $Res Function(_$_StatePending) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_StatePending implements _StatePending {
-  const _$_StatePending();
-
-  @override
-  String toString() {
-    return 'NewsListState.pending()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_StatePending);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() pending,
-    required TResult Function(
-            List<Article> articles, Section? selectedSection, bool isConnected)
-        dataReceived,
-    required TResult Function(String? errorText) error,
-    required TResult Function(List<Article> articles) searchResult,
-  }) {
-    return pending();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? pending,
-    TResult? Function(
-            List<Article> articles, Section? selectedSection, bool isConnected)?
-        dataReceived,
-    TResult? Function(String? errorText)? error,
-    TResult? Function(List<Article> articles)? searchResult,
-  }) {
-    return pending?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? pending,
-    TResult Function(
-            List<Article> articles, Section? selectedSection, bool isConnected)?
-        dataReceived,
-    TResult Function(String? errorText)? error,
-    TResult Function(List<Article> articles)? searchResult,
-    required TResult orElse(),
-  }) {
-    if (pending != null) {
-      return pending();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_StatePending value) pending,
-    required TResult Function(_StateDataReceived value) dataReceived,
-    required TResult Function(_StateError value) error,
-    required TResult Function(_StateSearchResult value) searchResult,
-  }) {
-    return pending(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_StatePending value)? pending,
-    TResult? Function(_StateDataReceived value)? dataReceived,
-    TResult? Function(_StateError value)? error,
-    TResult? Function(_StateSearchResult value)? searchResult,
-  }) {
-    return pending?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_StatePending value)? pending,
-    TResult Function(_StateDataReceived value)? dataReceived,
-    TResult Function(_StateError value)? error,
-    TResult Function(_StateSearchResult value)? searchResult,
-    required TResult orElse(),
-  }) {
-    if (pending != null) {
-      return pending(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _StatePending implements NewsListState {
-  const factory _StatePending() = _$_StatePending;
-}
-
-/// @nodoc
 abstract class _$$_StateDataReceivedCopyWith<$Res> {
   factory _$$_StateDataReceivedCopyWith(_$_StateDataReceived value,
           $Res Function(_$_StateDataReceived) then) =
       __$$_StateDataReceivedCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {List<Article> articles, Section? selectedSection, bool isConnected});
+      {List<Article> articles,
+      Section? selectedSection,
+      bool isConnected,
+      bool isPending});
 }
 
 /// @nodoc
@@ -1071,6 +948,7 @@ class __$$_StateDataReceivedCopyWithImpl<$Res>
     Object? articles = null,
     Object? selectedSection = freezed,
     Object? isConnected = null,
+    Object? isPending = null,
   }) {
     return _then(_$_StateDataReceived(
       articles: null == articles
@@ -1085,6 +963,10 @@ class __$$_StateDataReceivedCopyWithImpl<$Res>
           ? _value.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
               as bool,
+      isPending: null == isPending
+          ? _value.isPending
+          : isPending // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1095,7 +977,8 @@ class _$_StateDataReceived implements _StateDataReceived {
   const _$_StateDataReceived(
       {required final List<Article> articles,
       this.selectedSection,
-      required this.isConnected})
+      required this.isConnected,
+      this.isPending = false})
       : _articles = articles;
 
   final List<Article> _articles;
@@ -1110,10 +993,13 @@ class _$_StateDataReceived implements _StateDataReceived {
   final Section? selectedSection;
   @override
   final bool isConnected;
+  @override
+  @JsonKey()
+  final bool isPending;
 
   @override
   String toString() {
-    return 'NewsListState.dataReceived(articles: $articles, selectedSection: $selectedSection, isConnected: $isConnected)';
+    return 'NewsListState.dataReceived(articles: $articles, selectedSection: $selectedSection, isConnected: $isConnected, isPending: $isPending)';
   }
 
   @override
@@ -1125,7 +1011,9 @@ class _$_StateDataReceived implements _StateDataReceived {
             (identical(other.selectedSection, selectedSection) ||
                 other.selectedSection == selectedSection) &&
             (identical(other.isConnected, isConnected) ||
-                other.isConnected == isConnected));
+                other.isConnected == isConnected) &&
+            (identical(other.isPending, isPending) ||
+                other.isPending == isPending));
   }
 
   @override
@@ -1133,7 +1021,8 @@ class _$_StateDataReceived implements _StateDataReceived {
       runtimeType,
       const DeepCollectionEquality().hash(_articles),
       selectedSection,
-      isConnected);
+      isConnected,
+      isPending);
 
   @JsonKey(ignore: true)
   @override
@@ -1145,42 +1034,40 @@ class _$_StateDataReceived implements _StateDataReceived {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() pending,
-    required TResult Function(
-            List<Article> articles, Section? selectedSection, bool isConnected)
+    required TResult Function(List<Article> articles, Section? selectedSection,
+            bool isConnected, bool isPending)
         dataReceived,
     required TResult Function(String? errorText) error,
     required TResult Function(List<Article> articles) searchResult,
   }) {
-    return dataReceived(articles, selectedSection, isConnected);
+    return dataReceived(articles, selectedSection, isConnected, isPending);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? pending,
-    TResult? Function(
-            List<Article> articles, Section? selectedSection, bool isConnected)?
+    TResult? Function(List<Article> articles, Section? selectedSection,
+            bool isConnected, bool isPending)?
         dataReceived,
     TResult? Function(String? errorText)? error,
     TResult? Function(List<Article> articles)? searchResult,
   }) {
-    return dataReceived?.call(articles, selectedSection, isConnected);
+    return dataReceived?.call(
+        articles, selectedSection, isConnected, isPending);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? pending,
-    TResult Function(
-            List<Article> articles, Section? selectedSection, bool isConnected)?
+    TResult Function(List<Article> articles, Section? selectedSection,
+            bool isConnected, bool isPending)?
         dataReceived,
     TResult Function(String? errorText)? error,
     TResult Function(List<Article> articles)? searchResult,
     required TResult orElse(),
   }) {
     if (dataReceived != null) {
-      return dataReceived(articles, selectedSection, isConnected);
+      return dataReceived(articles, selectedSection, isConnected, isPending);
     }
     return orElse();
   }
@@ -1188,7 +1075,6 @@ class _$_StateDataReceived implements _StateDataReceived {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_StatePending value) pending,
     required TResult Function(_StateDataReceived value) dataReceived,
     required TResult Function(_StateError value) error,
     required TResult Function(_StateSearchResult value) searchResult,
@@ -1199,7 +1085,6 @@ class _$_StateDataReceived implements _StateDataReceived {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_StatePending value)? pending,
     TResult? Function(_StateDataReceived value)? dataReceived,
     TResult? Function(_StateError value)? error,
     TResult? Function(_StateSearchResult value)? searchResult,
@@ -1210,7 +1095,6 @@ class _$_StateDataReceived implements _StateDataReceived {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_StatePending value)? pending,
     TResult Function(_StateDataReceived value)? dataReceived,
     TResult Function(_StateError value)? error,
     TResult Function(_StateSearchResult value)? searchResult,
@@ -1227,11 +1111,13 @@ abstract class _StateDataReceived implements NewsListState {
   const factory _StateDataReceived(
       {required final List<Article> articles,
       final Section? selectedSection,
-      required final bool isConnected}) = _$_StateDataReceived;
+      required final bool isConnected,
+      final bool isPending}) = _$_StateDataReceived;
 
   List<Article> get articles;
   Section? get selectedSection;
   bool get isConnected;
+  bool get isPending;
   @JsonKey(ignore: true)
   _$$_StateDataReceivedCopyWith<_$_StateDataReceived> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1302,9 +1188,8 @@ class _$_StateError implements _StateError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() pending,
-    required TResult Function(
-            List<Article> articles, Section? selectedSection, bool isConnected)
+    required TResult Function(List<Article> articles, Section? selectedSection,
+            bool isConnected, bool isPending)
         dataReceived,
     required TResult Function(String? errorText) error,
     required TResult Function(List<Article> articles) searchResult,
@@ -1315,9 +1200,8 @@ class _$_StateError implements _StateError {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? pending,
-    TResult? Function(
-            List<Article> articles, Section? selectedSection, bool isConnected)?
+    TResult? Function(List<Article> articles, Section? selectedSection,
+            bool isConnected, bool isPending)?
         dataReceived,
     TResult? Function(String? errorText)? error,
     TResult? Function(List<Article> articles)? searchResult,
@@ -1328,9 +1212,8 @@ class _$_StateError implements _StateError {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? pending,
-    TResult Function(
-            List<Article> articles, Section? selectedSection, bool isConnected)?
+    TResult Function(List<Article> articles, Section? selectedSection,
+            bool isConnected, bool isPending)?
         dataReceived,
     TResult Function(String? errorText)? error,
     TResult Function(List<Article> articles)? searchResult,
@@ -1345,7 +1228,6 @@ class _$_StateError implements _StateError {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_StatePending value) pending,
     required TResult Function(_StateDataReceived value) dataReceived,
     required TResult Function(_StateError value) error,
     required TResult Function(_StateSearchResult value) searchResult,
@@ -1356,7 +1238,6 @@ class _$_StateError implements _StateError {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_StatePending value)? pending,
     TResult? Function(_StateDataReceived value)? dataReceived,
     TResult? Function(_StateError value)? error,
     TResult? Function(_StateSearchResult value)? searchResult,
@@ -1367,7 +1248,6 @@ class _$_StateError implements _StateError {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_StatePending value)? pending,
     TResult Function(_StateDataReceived value)? dataReceived,
     TResult Function(_StateError value)? error,
     TResult Function(_StateSearchResult value)? searchResult,
@@ -1461,9 +1341,8 @@ class _$_StateSearchResult implements _StateSearchResult {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() pending,
-    required TResult Function(
-            List<Article> articles, Section? selectedSection, bool isConnected)
+    required TResult Function(List<Article> articles, Section? selectedSection,
+            bool isConnected, bool isPending)
         dataReceived,
     required TResult Function(String? errorText) error,
     required TResult Function(List<Article> articles) searchResult,
@@ -1474,9 +1353,8 @@ class _$_StateSearchResult implements _StateSearchResult {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? pending,
-    TResult? Function(
-            List<Article> articles, Section? selectedSection, bool isConnected)?
+    TResult? Function(List<Article> articles, Section? selectedSection,
+            bool isConnected, bool isPending)?
         dataReceived,
     TResult? Function(String? errorText)? error,
     TResult? Function(List<Article> articles)? searchResult,
@@ -1487,9 +1365,8 @@ class _$_StateSearchResult implements _StateSearchResult {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? pending,
-    TResult Function(
-            List<Article> articles, Section? selectedSection, bool isConnected)?
+    TResult Function(List<Article> articles, Section? selectedSection,
+            bool isConnected, bool isPending)?
         dataReceived,
     TResult Function(String? errorText)? error,
     TResult Function(List<Article> articles)? searchResult,
@@ -1504,7 +1381,6 @@ class _$_StateSearchResult implements _StateSearchResult {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_StatePending value) pending,
     required TResult Function(_StateDataReceived value) dataReceived,
     required TResult Function(_StateError value) error,
     required TResult Function(_StateSearchResult value) searchResult,
@@ -1515,7 +1391,6 @@ class _$_StateSearchResult implements _StateSearchResult {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_StatePending value)? pending,
     TResult? Function(_StateDataReceived value)? dataReceived,
     TResult? Function(_StateError value)? error,
     TResult? Function(_StateSearchResult value)? searchResult,
@@ -1526,7 +1401,6 @@ class _$_StateSearchResult implements _StateSearchResult {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_StatePending value)? pending,
     TResult Function(_StateDataReceived value)? dataReceived,
     TResult Function(_StateError value)? error,
     TResult Function(_StateSearchResult value)? searchResult,
