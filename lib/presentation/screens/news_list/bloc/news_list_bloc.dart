@@ -26,7 +26,12 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
     @DepArg() required this.api,
     @DepArg() required this.articlesRepository,
     @DepArg() required this.localDb,
-  }) : super(const _StatePending()) {
+  }) : super(const NewsListState.dataReceived(
+          articles: [],
+          selectedSection: null,
+          isConnected: true,
+          isPending: true,
+        )) {
     on<NewsListEvent>(
       (event, emitter) => event.map(
         dataRequested: (event) => _dataRequested(event, emitter),
@@ -92,8 +97,10 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
       isConnected = true;
       try {
         isLoadingNextPage = true;
-        final pageArticles =
-            await api.getArticles(page: page, selectedSection: selectedSection);
+        final pageArticles = await api.getArticles(
+          page: page,
+          sections: selectedSection != null ? [selectedSection!] : null,
+        );
 
         final List<String> titlesOfExistingArticles =
             articles.map((article) => article.title).toList();
@@ -107,7 +114,7 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
           ...newArticles,
           ...articles,
         ];
-        log('main screen, from server: ' + articles.first.title);
+
         localArticles = await articlesRepository.getLocalArticles() ?? [];
         await renewLocalDbArticlesList();
         page++;
@@ -195,7 +202,11 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
       _EventSectionSelected event, Emitter emitter) async {
     page = 0;
     selectedSection = event.selectedSection;
-    emitter(const NewsListState.pending());
+    emitter(NewsListState.dataReceived(
+      articles: articles,
+      isConnected: isConnected,
+      isPending: true,
+    ));
     add(const NewsListEvent.dataRequested());
   }
 

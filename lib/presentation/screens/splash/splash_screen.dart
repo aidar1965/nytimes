@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../generated/locale_keys.g.dart';
+import '../../constants/palette.dart';
 import '../../router/app_router.dart';
 
 @RoutePage()
@@ -32,14 +33,21 @@ class SplashScreen extends StatelessWidget {
             body: child,
             bottomNavigationBar: BottomNavigationBar(
               currentIndex: tabsRouter.activeIndex,
+              unselectedItemColor: Palette.primary40,
+              unselectedIconTheme:
+                  const IconThemeData(color: Palette.primary40),
+              selectedItemColor: Palette.primary60,
+              showSelectedLabels: false,
+              selectedIconTheme:
+                  const IconThemeData(color: Palette.primary60, size: 30),
               onTap: (index) {
                 // here we switch between tabs
                 tabsRouter.setActiveIndex(index);
               },
               items: [
                 BottomNavigationBarItem(
-                  icon: const Icon(Icons.list),
-                  label: LocaleKeys.bottomNavigationNews.tr(),
+                  icon: const Icon(Icons.view_list_outlined),
+                  label: LocaleKeys.bottomNavigationArticles.tr(),
                 ),
                 BottomNavigationBarItem(
                   icon: const Icon(Icons.favorite_border_outlined),

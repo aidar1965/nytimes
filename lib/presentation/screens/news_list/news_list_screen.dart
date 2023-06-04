@@ -51,17 +51,16 @@ class _NewsListScreenState extends State<NewsListScreen> {
               error: (state) => CommonFunctions.showMessage(
                   context, state.errorText!)), // TODO
           buildWhen: (previous, current) => current.maybeMap(
-              pending: (_) => true,
               dataReceived: (_) => true,
               searchResult: (_) => true,
               orElse: () => false),
           builder: (context, state) => state.maybeMap(
               orElse: () => throw UnimplementedError(),
-              pending: (_) => const Pending(),
               dataReceived: (state) => NewsListView(
                     articles: state.articles,
                     selectedSection: state.selectedSection,
                     isConnected: state.isConnected,
+                    isPending: state.isPending,
                   ),
               searchResult: (state) => NewsListView(
                     // TODO
@@ -79,11 +78,13 @@ class NewsListView extends StatefulWidget {
     required this.articles,
     this.selectedSection,
     required this.isConnected,
+    this.isPending = false,
   });
 
   final List<Article> articles;
   final Section? selectedSection;
   final bool isConnected;
+  final bool isPending;
 
   @override
   State<NewsListView> createState() => _NewsListViewState();
@@ -138,6 +139,7 @@ class _NewsListViewState extends State<NewsListView> {
             child: _SectionListView(selectedSection: widget.selectedSection)),
         appBar: AppBar(
           centerTitle: true,
+          elevation: 0,
           title: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -185,7 +187,7 @@ class _NewsListViewState extends State<NewsListView> {
           slivers: [
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
+                padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
                 child: Row(
                   children: [
                     Expanded(
@@ -216,21 +218,27 @@ class _NewsListViewState extends State<NewsListView> {
                 ),
               ),
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                childCount: widget.articles.length,
-                (context, index) => Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    NewsListItem(
-                      article: widget.articles.elementAt(index),
-                      isConnected: widget.isConnected,
+            widget.isPending == false
+                ? SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      childCount: widget.articles.length,
+                      (context, index) => Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          NewsListItem(
+                            article: widget.articles.elementAt(index),
+                            isConnected: widget.isConnected,
+                          ),
+                          const Divider(height: 1, color: Palette.divider)
+                        ],
+                      ),
                     ),
-                    const Divider(height: 1, color: Palette.divider)
-                  ],
-                ),
-              ),
-            ),
+                  )
+                : const SliverFillRemaining(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
           ],
         ),
       ),
