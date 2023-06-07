@@ -12,7 +12,7 @@ Isar (local db),
 Bloc with Freezed (state management)
 
 
-1. Showing a list of all articles.
+1. Showing a list of articles.
 2. Pagination.
 3. Filtering articles by sections.
 4. Display the full version of the article in WebView
