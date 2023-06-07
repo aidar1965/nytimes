@@ -8,6 +8,7 @@ const notificationId = 888;
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
+
 const AndroidNotificationDetails androidPlatformChannelSpecifics =
     AndroidNotificationDetails(
   'NYT_API',
