@@ -24,6 +24,7 @@ mixin _$NewsListEvent {
     required TResult Function(Section? selectedSection) sectionSelected,
     required TResult Function(ConnectivityResult connectivityResult)
         onConnectivityChanged,
+    required TResult Function(List<Article>? articles) onLocalArticlesChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,6 +35,7 @@ mixin _$NewsListEvent {
     TResult? Function(Section? selectedSection)? sectionSelected,
     TResult? Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
+    TResult? Function(List<Article>? articles)? onLocalArticlesChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -44,6 +46,7 @@ mixin _$NewsListEvent {
     TResult Function(Section? selectedSection)? sectionSelected,
     TResult Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
+    TResult Function(List<Article>? articles)? onLocalArticlesChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +58,8 @@ mixin _$NewsListEvent {
     required TResult Function(_EventSectionSelected value) sectionSelected,
     required TResult Function(_EventConnectivityChanged value)
         onConnectivityChanged,
+    required TResult Function(_EventOnLocalArticlesChanged value)
+        onLocalArticlesChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -64,6 +69,8 @@ mixin _$NewsListEvent {
     TResult? Function(_EventRefresh value)? refresh,
     TResult? Function(_EventSectionSelected value)? sectionSelected,
     TResult? Function(_EventConnectivityChanged value)? onConnectivityChanged,
+    TResult? Function(_EventOnLocalArticlesChanged value)?
+        onLocalArticlesChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -73,6 +80,8 @@ mixin _$NewsListEvent {
     TResult Function(_EventRefresh value)? refresh,
     TResult Function(_EventSectionSelected value)? sectionSelected,
     TResult Function(_EventConnectivityChanged value)? onConnectivityChanged,
+    TResult Function(_EventOnLocalArticlesChanged value)?
+        onLocalArticlesChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -167,6 +176,7 @@ class _$_EventDataRequested implements _EventDataRequested {
     required TResult Function(Section? selectedSection) sectionSelected,
     required TResult Function(ConnectivityResult connectivityResult)
         onConnectivityChanged,
+    required TResult Function(List<Article>? articles) onLocalArticlesChanged,
   }) {
     return dataRequested(page);
   }
@@ -180,6 +190,7 @@ class _$_EventDataRequested implements _EventDataRequested {
     TResult? Function(Section? selectedSection)? sectionSelected,
     TResult? Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
+    TResult? Function(List<Article>? articles)? onLocalArticlesChanged,
   }) {
     return dataRequested?.call(page);
   }
@@ -193,6 +204,7 @@ class _$_EventDataRequested implements _EventDataRequested {
     TResult Function(Section? selectedSection)? sectionSelected,
     TResult Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
+    TResult Function(List<Article>? articles)? onLocalArticlesChanged,
     required TResult orElse(),
   }) {
     if (dataRequested != null) {
@@ -210,6 +222,8 @@ class _$_EventDataRequested implements _EventDataRequested {
     required TResult Function(_EventSectionSelected value) sectionSelected,
     required TResult Function(_EventConnectivityChanged value)
         onConnectivityChanged,
+    required TResult Function(_EventOnLocalArticlesChanged value)
+        onLocalArticlesChanged,
   }) {
     return dataRequested(this);
   }
@@ -222,6 +236,8 @@ class _$_EventDataRequested implements _EventDataRequested {
     TResult? Function(_EventRefresh value)? refresh,
     TResult? Function(_EventSectionSelected value)? sectionSelected,
     TResult? Function(_EventConnectivityChanged value)? onConnectivityChanged,
+    TResult? Function(_EventOnLocalArticlesChanged value)?
+        onLocalArticlesChanged,
   }) {
     return dataRequested?.call(this);
   }
@@ -234,6 +250,8 @@ class _$_EventDataRequested implements _EventDataRequested {
     TResult Function(_EventRefresh value)? refresh,
     TResult Function(_EventSectionSelected value)? sectionSelected,
     TResult Function(_EventConnectivityChanged value)? onConnectivityChanged,
+    TResult Function(_EventOnLocalArticlesChanged value)?
+        onLocalArticlesChanged,
     required TResult orElse(),
   }) {
     if (dataRequested != null) {
@@ -322,6 +340,7 @@ class _$_EventSearch implements _EventSearch {
     required TResult Function(Section? selectedSection) sectionSelected,
     required TResult Function(ConnectivityResult connectivityResult)
         onConnectivityChanged,
+    required TResult Function(List<Article>? articles) onLocalArticlesChanged,
   }) {
     return search(text);
   }
@@ -335,6 +354,7 @@ class _$_EventSearch implements _EventSearch {
     TResult? Function(Section? selectedSection)? sectionSelected,
     TResult? Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
+    TResult? Function(List<Article>? articles)? onLocalArticlesChanged,
   }) {
     return search?.call(text);
   }
@@ -348,6 +368,7 @@ class _$_EventSearch implements _EventSearch {
     TResult Function(Section? selectedSection)? sectionSelected,
     TResult Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
+    TResult Function(List<Article>? articles)? onLocalArticlesChanged,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -365,6 +386,8 @@ class _$_EventSearch implements _EventSearch {
     required TResult Function(_EventSectionSelected value) sectionSelected,
     required TResult Function(_EventConnectivityChanged value)
         onConnectivityChanged,
+    required TResult Function(_EventOnLocalArticlesChanged value)
+        onLocalArticlesChanged,
   }) {
     return search(this);
   }
@@ -377,6 +400,8 @@ class _$_EventSearch implements _EventSearch {
     TResult? Function(_EventRefresh value)? refresh,
     TResult? Function(_EventSectionSelected value)? sectionSelected,
     TResult? Function(_EventConnectivityChanged value)? onConnectivityChanged,
+    TResult? Function(_EventOnLocalArticlesChanged value)?
+        onLocalArticlesChanged,
   }) {
     return search?.call(this);
   }
@@ -389,6 +414,8 @@ class _$_EventSearch implements _EventSearch {
     TResult Function(_EventRefresh value)? refresh,
     TResult Function(_EventSectionSelected value)? sectionSelected,
     TResult Function(_EventConnectivityChanged value)? onConnectivityChanged,
+    TResult Function(_EventOnLocalArticlesChanged value)?
+        onLocalArticlesChanged,
     required TResult orElse(),
   }) {
     if (search != null) {
@@ -451,6 +478,7 @@ class _$_EventRefresh implements _EventRefresh {
     required TResult Function(Section? selectedSection) sectionSelected,
     required TResult Function(ConnectivityResult connectivityResult)
         onConnectivityChanged,
+    required TResult Function(List<Article>? articles) onLocalArticlesChanged,
   }) {
     return refresh();
   }
@@ -464,6 +492,7 @@ class _$_EventRefresh implements _EventRefresh {
     TResult? Function(Section? selectedSection)? sectionSelected,
     TResult? Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
+    TResult? Function(List<Article>? articles)? onLocalArticlesChanged,
   }) {
     return refresh?.call();
   }
@@ -477,6 +506,7 @@ class _$_EventRefresh implements _EventRefresh {
     TResult Function(Section? selectedSection)? sectionSelected,
     TResult Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
+    TResult Function(List<Article>? articles)? onLocalArticlesChanged,
     required TResult orElse(),
   }) {
     if (refresh != null) {
@@ -494,6 +524,8 @@ class _$_EventRefresh implements _EventRefresh {
     required TResult Function(_EventSectionSelected value) sectionSelected,
     required TResult Function(_EventConnectivityChanged value)
         onConnectivityChanged,
+    required TResult Function(_EventOnLocalArticlesChanged value)
+        onLocalArticlesChanged,
   }) {
     return refresh(this);
   }
@@ -506,6 +538,8 @@ class _$_EventRefresh implements _EventRefresh {
     TResult? Function(_EventRefresh value)? refresh,
     TResult? Function(_EventSectionSelected value)? sectionSelected,
     TResult? Function(_EventConnectivityChanged value)? onConnectivityChanged,
+    TResult? Function(_EventOnLocalArticlesChanged value)?
+        onLocalArticlesChanged,
   }) {
     return refresh?.call(this);
   }
@@ -518,6 +552,8 @@ class _$_EventRefresh implements _EventRefresh {
     TResult Function(_EventRefresh value)? refresh,
     TResult Function(_EventSectionSelected value)? sectionSelected,
     TResult Function(_EventConnectivityChanged value)? onConnectivityChanged,
+    TResult Function(_EventOnLocalArticlesChanged value)?
+        onLocalArticlesChanged,
     required TResult orElse(),
   }) {
     if (refresh != null) {
@@ -603,6 +639,7 @@ class _$_EventSectionSelected implements _EventSectionSelected {
     required TResult Function(Section? selectedSection) sectionSelected,
     required TResult Function(ConnectivityResult connectivityResult)
         onConnectivityChanged,
+    required TResult Function(List<Article>? articles) onLocalArticlesChanged,
   }) {
     return sectionSelected(selectedSection);
   }
@@ -616,6 +653,7 @@ class _$_EventSectionSelected implements _EventSectionSelected {
     TResult? Function(Section? selectedSection)? sectionSelected,
     TResult? Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
+    TResult? Function(List<Article>? articles)? onLocalArticlesChanged,
   }) {
     return sectionSelected?.call(selectedSection);
   }
@@ -629,6 +667,7 @@ class _$_EventSectionSelected implements _EventSectionSelected {
     TResult Function(Section? selectedSection)? sectionSelected,
     TResult Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
+    TResult Function(List<Article>? articles)? onLocalArticlesChanged,
     required TResult orElse(),
   }) {
     if (sectionSelected != null) {
@@ -646,6 +685,8 @@ class _$_EventSectionSelected implements _EventSectionSelected {
     required TResult Function(_EventSectionSelected value) sectionSelected,
     required TResult Function(_EventConnectivityChanged value)
         onConnectivityChanged,
+    required TResult Function(_EventOnLocalArticlesChanged value)
+        onLocalArticlesChanged,
   }) {
     return sectionSelected(this);
   }
@@ -658,6 +699,8 @@ class _$_EventSectionSelected implements _EventSectionSelected {
     TResult? Function(_EventRefresh value)? refresh,
     TResult? Function(_EventSectionSelected value)? sectionSelected,
     TResult? Function(_EventConnectivityChanged value)? onConnectivityChanged,
+    TResult? Function(_EventOnLocalArticlesChanged value)?
+        onLocalArticlesChanged,
   }) {
     return sectionSelected?.call(this);
   }
@@ -670,6 +713,8 @@ class _$_EventSectionSelected implements _EventSectionSelected {
     TResult Function(_EventRefresh value)? refresh,
     TResult Function(_EventSectionSelected value)? sectionSelected,
     TResult Function(_EventConnectivityChanged value)? onConnectivityChanged,
+    TResult Function(_EventOnLocalArticlesChanged value)?
+        onLocalArticlesChanged,
     required TResult orElse(),
   }) {
     if (sectionSelected != null) {
@@ -762,6 +807,7 @@ class _$_EventConnectivityChanged implements _EventConnectivityChanged {
     required TResult Function(Section? selectedSection) sectionSelected,
     required TResult Function(ConnectivityResult connectivityResult)
         onConnectivityChanged,
+    required TResult Function(List<Article>? articles) onLocalArticlesChanged,
   }) {
     return onConnectivityChanged(connectivityResult);
   }
@@ -775,6 +821,7 @@ class _$_EventConnectivityChanged implements _EventConnectivityChanged {
     TResult? Function(Section? selectedSection)? sectionSelected,
     TResult? Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
+    TResult? Function(List<Article>? articles)? onLocalArticlesChanged,
   }) {
     return onConnectivityChanged?.call(connectivityResult);
   }
@@ -788,6 +835,7 @@ class _$_EventConnectivityChanged implements _EventConnectivityChanged {
     TResult Function(Section? selectedSection)? sectionSelected,
     TResult Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
+    TResult Function(List<Article>? articles)? onLocalArticlesChanged,
     required TResult orElse(),
   }) {
     if (onConnectivityChanged != null) {
@@ -805,6 +853,8 @@ class _$_EventConnectivityChanged implements _EventConnectivityChanged {
     required TResult Function(_EventSectionSelected value) sectionSelected,
     required TResult Function(_EventConnectivityChanged value)
         onConnectivityChanged,
+    required TResult Function(_EventOnLocalArticlesChanged value)
+        onLocalArticlesChanged,
   }) {
     return onConnectivityChanged(this);
   }
@@ -817,6 +867,8 @@ class _$_EventConnectivityChanged implements _EventConnectivityChanged {
     TResult? Function(_EventRefresh value)? refresh,
     TResult? Function(_EventSectionSelected value)? sectionSelected,
     TResult? Function(_EventConnectivityChanged value)? onConnectivityChanged,
+    TResult? Function(_EventOnLocalArticlesChanged value)?
+        onLocalArticlesChanged,
   }) {
     return onConnectivityChanged?.call(this);
   }
@@ -829,6 +881,8 @@ class _$_EventConnectivityChanged implements _EventConnectivityChanged {
     TResult Function(_EventRefresh value)? refresh,
     TResult Function(_EventSectionSelected value)? sectionSelected,
     TResult Function(_EventConnectivityChanged value)? onConnectivityChanged,
+    TResult Function(_EventOnLocalArticlesChanged value)?
+        onLocalArticlesChanged,
     required TResult orElse(),
   }) {
     if (onConnectivityChanged != null) {
@@ -846,6 +900,183 @@ abstract class _EventConnectivityChanged implements NewsListEvent {
   ConnectivityResult get connectivityResult;
   @JsonKey(ignore: true)
   _$$_EventConnectivityChangedCopyWith<_$_EventConnectivityChanged>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_EventOnLocalArticlesChangedCopyWith<$Res> {
+  factory _$$_EventOnLocalArticlesChangedCopyWith(
+          _$_EventOnLocalArticlesChanged value,
+          $Res Function(_$_EventOnLocalArticlesChanged) then) =
+      __$$_EventOnLocalArticlesChangedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Article>? articles});
+}
+
+/// @nodoc
+class __$$_EventOnLocalArticlesChangedCopyWithImpl<$Res>
+    extends _$NewsListEventCopyWithImpl<$Res, _$_EventOnLocalArticlesChanged>
+    implements _$$_EventOnLocalArticlesChangedCopyWith<$Res> {
+  __$$_EventOnLocalArticlesChangedCopyWithImpl(
+      _$_EventOnLocalArticlesChanged _value,
+      $Res Function(_$_EventOnLocalArticlesChanged) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? articles = freezed,
+  }) {
+    return _then(_$_EventOnLocalArticlesChanged(
+      freezed == articles
+          ? _value._articles
+          : articles // ignore: cast_nullable_to_non_nullable
+              as List<Article>?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_EventOnLocalArticlesChanged implements _EventOnLocalArticlesChanged {
+  const _$_EventOnLocalArticlesChanged(final List<Article>? articles)
+      : _articles = articles;
+
+  final List<Article>? _articles;
+  @override
+  List<Article>? get articles {
+    final value = _articles;
+    if (value == null) return null;
+    if (_articles is EqualUnmodifiableListView) return _articles;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'NewsListEvent.onLocalArticlesChanged(articles: $articles)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_EventOnLocalArticlesChanged &&
+            const DeepCollectionEquality().equals(other._articles, _articles));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_articles));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_EventOnLocalArticlesChangedCopyWith<_$_EventOnLocalArticlesChanged>
+      get copyWith => __$$_EventOnLocalArticlesChangedCopyWithImpl<
+          _$_EventOnLocalArticlesChanged>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int? page) dataRequested,
+    required TResult Function(String text) search,
+    required TResult Function() refresh,
+    required TResult Function(Section? selectedSection) sectionSelected,
+    required TResult Function(ConnectivityResult connectivityResult)
+        onConnectivityChanged,
+    required TResult Function(List<Article>? articles) onLocalArticlesChanged,
+  }) {
+    return onLocalArticlesChanged(articles);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int? page)? dataRequested,
+    TResult? Function(String text)? search,
+    TResult? Function()? refresh,
+    TResult? Function(Section? selectedSection)? sectionSelected,
+    TResult? Function(ConnectivityResult connectivityResult)?
+        onConnectivityChanged,
+    TResult? Function(List<Article>? articles)? onLocalArticlesChanged,
+  }) {
+    return onLocalArticlesChanged?.call(articles);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int? page)? dataRequested,
+    TResult Function(String text)? search,
+    TResult Function()? refresh,
+    TResult Function(Section? selectedSection)? sectionSelected,
+    TResult Function(ConnectivityResult connectivityResult)?
+        onConnectivityChanged,
+    TResult Function(List<Article>? articles)? onLocalArticlesChanged,
+    required TResult orElse(),
+  }) {
+    if (onLocalArticlesChanged != null) {
+      return onLocalArticlesChanged(articles);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_EventDataRequested value) dataRequested,
+    required TResult Function(_EventSearch value) search,
+    required TResult Function(_EventRefresh value) refresh,
+    required TResult Function(_EventSectionSelected value) sectionSelected,
+    required TResult Function(_EventConnectivityChanged value)
+        onConnectivityChanged,
+    required TResult Function(_EventOnLocalArticlesChanged value)
+        onLocalArticlesChanged,
+  }) {
+    return onLocalArticlesChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_EventDataRequested value)? dataRequested,
+    TResult? Function(_EventSearch value)? search,
+    TResult? Function(_EventRefresh value)? refresh,
+    TResult? Function(_EventSectionSelected value)? sectionSelected,
+    TResult? Function(_EventConnectivityChanged value)? onConnectivityChanged,
+    TResult? Function(_EventOnLocalArticlesChanged value)?
+        onLocalArticlesChanged,
+  }) {
+    return onLocalArticlesChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_EventDataRequested value)? dataRequested,
+    TResult Function(_EventSearch value)? search,
+    TResult Function(_EventRefresh value)? refresh,
+    TResult Function(_EventSectionSelected value)? sectionSelected,
+    TResult Function(_EventConnectivityChanged value)? onConnectivityChanged,
+    TResult Function(_EventOnLocalArticlesChanged value)?
+        onLocalArticlesChanged,
+    required TResult orElse(),
+  }) {
+    if (onLocalArticlesChanged != null) {
+      return onLocalArticlesChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _EventOnLocalArticlesChanged implements NewsListEvent {
+  const factory _EventOnLocalArticlesChanged(final List<Article>? articles) =
+      _$_EventOnLocalArticlesChanged;
+
+  List<Article>? get articles;
+  @JsonKey(ignore: true)
+  _$$_EventOnLocalArticlesChangedCopyWith<_$_EventOnLocalArticlesChanged>
       get copyWith => throw _privateConstructorUsedError;
 }
 

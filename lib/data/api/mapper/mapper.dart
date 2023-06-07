@@ -4,7 +4,6 @@ import 'package:nytimes/data/api/models/responses/page_articles_dto.dart';
 import 'package:nytimes/domain/models/page_articles.dart';
 
 import '../../../domain/models/article.dart';
-import '../../../presentation/constants/constants.dart';
 
 class ApiDataMapper {
   Article mapArticle(ArticleDto dto) {

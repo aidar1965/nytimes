@@ -1,5 +1,4 @@
 import 'package:isar/isar.dart';
-import 'package:nytimes/data/api/models/article_category.dart';
 
 import '../../data/api/models/section.dart';
 

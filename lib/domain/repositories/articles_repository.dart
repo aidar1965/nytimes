@@ -47,4 +47,10 @@ class ArticlesRepository implements IArticlesRepository {
   ArticlesSubscription subscribe(Function(List<Article>? articles) listener) {
     return _articlesController.stream.listen(listener);
   }
+
+  @override
+  Future<void> searchArticles(String text) async {
+    _articles = await localDb.searchArticles(text);
+    _articlesController.add(_articles);
+  }
 }

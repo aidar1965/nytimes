@@ -11,6 +11,8 @@ abstract class IArticlesRepository {
 
   Future<List<Article>?>? getLocalArticles();
 
+  Future<void> searchArticles(String text);
+
   Future<void> clearLocalArticles();
 
   ArticlesSubscription subscribe(Function(List<Article>?) listener);

@@ -5,7 +5,7 @@ import '../../../presentation/constants/constants.dart';
 import 'i_api_request.dart';
 import 'request_exception.dart';
 
-// http cliend with Dio
+// http client with Dio
 class DioClient {
   // ---------------------------------------------------------------------------
   DioClient() {

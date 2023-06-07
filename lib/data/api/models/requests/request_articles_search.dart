@@ -1,10 +1,7 @@
 import '../../../../presentation/common/common_functions.dart';
 import '../../../../presentation/constants/constants.dart';
-import '../../http_client/http_client.dart';
-import '../../http_client/i_api_request.dart';
-import '../article_category.dart';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import '../../http_client/i_api_request.dart';
 
 import '../section.dart';
 

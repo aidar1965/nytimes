@@ -28,7 +28,7 @@ class SplashScreen extends StatelessWidget {
         // Here we're building our Scaffold inside of AutoTabsRouter
         // to access the tabsRouter controller provided in this context
         //
-        //alterntivly you could use a global key
+        //alternatively you could use a global key
         return Scaffold(
             body: child,
             bottomNavigationBar: BottomNavigationBar(

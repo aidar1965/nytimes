@@ -17,4 +17,6 @@ class Constants {
   static const String hostHttp = 'https';
 
   static const String hostUrl = 'api.nytimes.com/';
+
+  static const int periodicSeachTime = 5;
 }

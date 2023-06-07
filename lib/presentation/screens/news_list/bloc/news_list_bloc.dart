@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dep_gen/dep_gen.dart';
@@ -9,11 +8,11 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import '../../../../data/api/http_client/request_exception.dart';
 
 import '../../../../domain/interfaces/i_api.dart';
-import '../../../../domain/interfaces/i_local_db.dart';
 import '../../../../domain/models/article.dart';
 
 import '../../../../data/api/models/section.dart';
 import '../../../../domain/interfaces/i_articles_repository.dart';
+import '../../../constants/constants.dart';
 
 part 'news_list_bloc.freezed.dart';
 part 'news_list_event.dart';
@@ -21,11 +20,9 @@ part 'news_list_state.dart';
 
 @DepGen()
 class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
-  NewsListBloc(
-    this.needToReload, {
+  NewsListBloc({
     @DepArg() required this.api,
     @DepArg() required this.articlesRepository,
-    @DepArg() required this.localDb,
   }) : super(const NewsListState.dataReceived(
           articles: [],
           selectedSection: null,
@@ -40,6 +37,8 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
         onConnectivityChanged: (event) =>
             _onConnectivityChanged(event, emitter),
         search: (event) => _localSearch(event, emitter),
+        onLocalArticlesChanged: (event) =>
+            _onLocalArticlesChanged(event, emitter),
       ),
     );
 
@@ -51,11 +50,12 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
     });
 
     addPeriodicFetch();
+    articlesRepositorySubscription =
+        articlesRepository.subscribe(onLocalArticlesChanged);
   }
 
   final IApi api;
   final IArticlesRepository articlesRepository;
-  final ILocalDb localDb;
 
   late List<Article> localArticles;
 
@@ -65,26 +65,32 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
 
   List<Article> articles = [];
 
+  // pagination
   int page = 0;
 
+  /// control not to send request while page loading on pagination
   bool isLoadingNextPage = false;
 
+  /// selected Section for local search
   Section? selectedSection;
-
-  bool isAppBackgroundServiceInitialized = false;
 
   final connectivity = Connectivity();
 
   late StreamSubscription<ConnectivityResult> connectivitySubscription;
 
+  late ArticlesSubscription articlesRepositorySubscription;
+
   late ConnectivityResult connectivityResult;
 
   late bool isConnected;
 
-  final bool? needToReload;
-
+  /// for periodic search
   Timer? timer;
 
+  /// control pagination while displaying local search result
+  bool onlyLocalArticles = false;
+
+  /// request articles from server or local database
   Future<void> _dataRequested(
       _EventDataRequested event, Emitter emitter) async {
     if (isLoadingNextPage) {
@@ -95,52 +101,64 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
     if (connectivityResult == ConnectivityResult.mobile ||
         connectivityResult == ConnectivityResult.wifi) {
       isConnected = true;
-      try {
-        isLoadingNextPage = true;
-        final pageArticles = await api.getArticles(
-          page: page,
-          sections: selectedSection != null ? [selectedSection!] : null,
-        );
 
-        final List<String> titlesOfExistingArticles =
-            articles.map((article) => article.title).toList();
+      /// checking if we are tor making local search
+      if (onlyLocalArticles == false) {
+        try {
+          isLoadingNextPage = true;
+          final pageArticles = await api.getArticles(
+            page: page,
+            sections: selectedSection != null ? [selectedSection!] : null,
+          );
 
-        final newArticles = pageArticles.articles.toList();
+          /// we should add only new articles
+          final List<String> titlesOfExistingArticles =
+              articles.map((article) => article.title).toList();
 
-        newArticles.removeWhere(
-            (article) => titlesOfExistingArticles.contains(article.title));
+          final newArticles = pageArticles.articles.toList();
 
-        articles = [
-          ...newArticles,
-          ...articles,
-        ];
+          newArticles.removeWhere(
+              (article) => titlesOfExistingArticles.contains(article.title));
 
-        localArticles = await articlesRepository.getLocalArticles() ?? [];
-        await renewLocalDbArticlesList();
-        page++;
+          articles = [
+            ...newArticles,
+            ...articles,
+          ];
 
-        emitter(NewsListState.dataReceived(
-          articles: articles,
-          selectedSection: selectedSection,
-          isConnected: isConnected,
-        ));
-      } on RequestException catch (e) {
-        if (e.httpStatusCode == 429) {
-          emitter(
-              const NewsListState.error(errorText: 'Quota limit  exceeded'));
-        } else {
-          articles = await articlesRepository.getLocalArticles() ?? [];
+          /// renew articles stored in local db
+          await renewLocalDbArticlesList();
+          page++;
+
           emitter(NewsListState.dataReceived(
             articles: articles,
+            selectedSection: selectedSection,
             isConnected: isConnected,
           ));
+        } on RequestException catch (e) {
+          /// this rxception specofied in API
+          if (e.httpStatusCode == 429) {
+            emitter(
+              const NewsListState.error(errorText: 'Quota limit  exceeded'),
+            );
+            articles = await articlesRepository.getLocalArticles() ?? [];
+            emitter(NewsListState.dataReceived(
+              articles: articles,
+              isConnected: isConnected,
+            ));
+          } else {
+            articles = await articlesRepository.getLocalArticles() ?? [];
+            emitter(NewsListState.dataReceived(
+              articles: articles,
+              isConnected: isConnected,
+            ));
+          }
+          rethrow;
+        } on Object {
+          emitter(const NewsListState.error(errorText: 'something went wrong'));
+          rethrow;
+        } finally {
+          isLoadingNextPage = false;
         }
-        rethrow;
-      } on Object catch (e) {
-        emitter(const NewsListState.error(errorText: 'something went wrong'));
-        rethrow;
-      } finally {
-        isLoadingNextPage = false;
       }
     } else {
       isConnected = false;
@@ -152,20 +170,20 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
     }
   }
 
+  /// used for emitting search results
   onLocalArticlesChanged(List<Article>? articlesFromDb) {
-    localArticles = articlesFromDb ?? [];
+    onlyLocalArticles = true;
+    add(NewsListEvent.onLocalArticlesChanged(articlesFromDb ?? []));
   }
 
+  /// update articles in local database
   Future<void> renewLocalDbArticlesList() async {
-    // переменная, с помощью которой будем проверять,
-    // нужно ли включать загруженный элемент листа в локальную
-    // базу данных
+    localArticles = await articlesRepository.getLocalArticles() ?? [];
+
     final List<String> articlesInDbTitles =
         localArticles.map((e) => e.title).toList();
 
     List<Article> aggregateList = [];
-
-    /// добавляем в список для локальной базы данных уникальные элементы
 
     if (articlesInDbTitles.isNotEmpty) {
       for (final a in articles) {
@@ -178,23 +196,22 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
     }
     aggregateList = [...aggregateList, ...localArticles];
 
-    // сортируем по времени, сначала новые
     aggregateList.sort((a, b) => b.date.compareTo(a.date));
-    // возвращаем первые 40 (или меньше)
+
     final renewedArticlesList =
         aggregateList.take(maximumArticlesInLocalDb).toList();
 
     if (renewedArticlesList.isNotEmpty) {
       await articlesRepository.clearLocalArticles();
       await articlesRepository.saveArticlesLocally(renewedArticlesList);
-      final a = await articlesRepository.getLocalArticles();
-      log(a!.first.articleAbstract);
     }
   }
 
+  /// on pull down refresh page
   Future<void> _refresh(_EventRefresh event, Emitter emitter) async {
     page = 0;
     articles = [];
+    onlyLocalArticles = false;
     add(const NewsListEvent.dataRequested());
   }
 
@@ -226,23 +243,34 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
   }
 
   Future<void> _localSearch(_EventSearch event, Emitter emitter) async {
-    final searchResultArticles = await localDb.searchArticles(event.text);
-    emitter(NewsListState.searchResult(articles: searchResultArticles ?? []));
+    await articlesRepository.searchArticles(event.text);
+  }
+
+  /// update data periodically
+  void addPeriodicFetch() {
+    Future.delayed(const Duration(minutes: Constants.periodicSeachTime), () {
+      timer = Timer.periodic(
+          const Duration(minutes: Constants.periodicSeachTime), (timer) async {
+        page = 0;
+        add(const NewsListEvent.dataRequested());
+      });
+    });
+  }
+
+  /// called by listener of articlesRepository
+  void _onLocalArticlesChanged(
+      _EventOnLocalArticlesChanged event, Emitter<NewsListState> emitter) {
+    emitter(NewsListState.dataReceived(
+      articles: event.articles ?? [],
+      isConnected: isConnected,
+    ));
   }
 
   @override
   Future<void> close() {
     connectivitySubscription.cancel();
+    articlesRepositorySubscription.cancel();
     timer?.cancel();
     return super.close();
-  }
-
-  void addPeriodicFetch() {
-    Future.delayed(const Duration(minutes: 5), () {
-      timer = Timer.periodic(const Duration(minutes: 5), (timer) async {
-        page = 0;
-        add(const NewsListEvent.dataRequested());
-      });
-    });
   }
 }

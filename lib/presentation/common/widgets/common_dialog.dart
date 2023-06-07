@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
+import '../../../generated/locale_keys.g.dart';
 import '../../constants/constants.dart';
 import '../../constants/palette.dart';
 import 'common_accent_button.dart';
@@ -79,12 +80,11 @@ class _CommonDialogState extends State<CommonDialog> {
                     : const SizedBox.shrink(),
                 actions: [
                   CommonAccentButton(
-                    isExpanded: true,
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    text: 'Ok', // TODO
-                  ),
+                      isExpanded: true,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      text: LocaleKeys.ok.tr()),
                 ])));
   }
 }

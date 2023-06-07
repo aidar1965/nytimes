@@ -8,6 +8,7 @@ const notificationId = 888;
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
+
 const AndroidNotificationDetails androidPlatformChannelSpecifics =
     AndroidNotificationDetails(
   'NYT_API',
@@ -75,6 +76,4 @@ void callbackDispatcher() {
   workManager.executeTask((task, inputData) async {
     return await workmanagerTask(task, inputData);
   });
-
-  //simpleTask will be emitted here.
 }

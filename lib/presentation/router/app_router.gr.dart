@@ -32,14 +32,9 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     NewsListRoute.name: (routeData) {
-      final args = routeData.argsAs<NewsListRouteArgs>(
-          orElse: () => const NewsListRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: NewsListScreen(
-          key: args.key,
-          needToReload: args.needToReload,
-        ),
+        child: const NewsListScreen(),
       );
     },
     SplashRoute.name: (routeData) {
@@ -111,40 +106,16 @@ class ArticleRouteArgs {
 
 /// generated route for
 /// [NewsListScreen]
-class NewsListRoute extends PageRouteInfo<NewsListRouteArgs> {
-  NewsListRoute({
-    Key? key,
-    bool? needToReload,
-    List<PageRouteInfo>? children,
-  }) : super(
+class NewsListRoute extends PageRouteInfo<void> {
+  const NewsListRoute({List<PageRouteInfo>? children})
+      : super(
           NewsListRoute.name,
-          args: NewsListRouteArgs(
-            key: key,
-            needToReload: needToReload,
-          ),
           initialChildren: children,
         );
 
   static const String name = 'NewsListRoute';
 
-  static const PageInfo<NewsListRouteArgs> page =
-      PageInfo<NewsListRouteArgs>(name);
-}
-
-class NewsListRouteArgs {
-  const NewsListRouteArgs({
-    this.key,
-    this.needToReload,
-  });
-
-  final Key? key;
-
-  final bool? needToReload;
-
-  @override
-  String toString() {
-    return 'NewsListRouteArgs{key: $key, needToReload: $needToReload}';
-  }
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

@@ -1,17 +1,13 @@
 import 'dart:async';
 import 'dart:developer';
-import 'dart:io';
-import 'dart:ui';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_background_service/flutter_background_service.dart';
-import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:nytimes/domain/interfaces/i_favorites_repository.dart';
-import 'package:nytimes/domain/models/favorite.dart';
 import 'package:permission_handler/permission_handler.dart';
+
+import 'domain/models/favorite.dart';
 import 'package:workmanager/workmanager.dart';
 import 'data/api/api.dart';
 import 'data/api/models/section.dart';
@@ -24,14 +20,26 @@ import 'presentation/theme/themes.dart';
 import 'domain/environment/di.dart';
 import 'domain/environment/environment.dart';
 
-part 'domain/workmanager/workmanager.dart';
-
-/// part 'domain/background_service/background_service.dart';
+part 'domain/workmanager_service/workmanager_service.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
   final environment = await Environment.buildEnvironment();
   await EasyLocalization.ensureInitialized();
+  await Permission.notification.isDenied.then((value) {
+    if (value) {
+      Permission.notification.request();
+    }
+  });
+
+  PermissionStatus status = await Permission.notification.request();
+  if (status.isGranted) {
+    // notification permission is granted
+  } else {
+    // Open settings to enable notification permission
+  }
+
   runApp(
     Di(
       environment: environment,
@@ -56,12 +64,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ///  WidgetsFlutterBinding.ensureInitialized();
     flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
       onSelectNotification: onSelectNotification,
     );
-    workManager.initialize(callbackDispatcher, isInDebugMode: true);
+    workManager.initialize(callbackDispatcher);
     workManager.registerPeriodicTask(
       "background_service",
       myTask,

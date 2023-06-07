@@ -6,6 +6,7 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../../generated/locale_keys.g.dart';
 import '../../constants/constants.dart';
 import '../../constants/palette.dart';
 
@@ -96,7 +97,7 @@ class _CommonEditFieldState extends State<CommonEditField> {
         _focusNode.unfocus();
       }
     });
-    _errorText = widget.errorText ?? 'Error'; //TODO locale!
+    _errorText = widget.errorText ?? LocaleKeys.error.tr();
     _error = widget.errorText != null;
   }
 
@@ -124,7 +125,7 @@ class _CommonEditFieldState extends State<CommonEditField> {
   void didUpdateWidget(CommonEditField oldWidget) {
     if (oldWidget.errorText != widget.errorText) {
       setState(() {
-        _errorText = widget.errorText ?? 'Error'; //TODO locale!
+        _errorText = widget.errorText ?? LocaleKeys.error.tr();
         _error = widget.errorText != null;
       });
     }
@@ -197,7 +198,7 @@ class _CommonEditFieldState extends State<CommonEditField> {
                   ? TextAlignVertical.top
                   : TextAlignVertical.center,
               textAlign: widget.isMultiline ? TextAlign.start : widget.align,
-              // в используемом шрифте символ \u2022 постоянно прыгает при вводе
+
               obscuringCharacter: '\u2055',
               obscureText: widget.obscureText,
               controller: _controller,
@@ -249,16 +250,12 @@ class _CommonEditFieldState extends State<CommonEditField> {
                   labelText: widget.hintText,
                   errorText: _error ? '' : null,
                   errorMaxLines: 2,
-
-                  // Границы
                   border: disableBorder,
                   enabledBorder: disableBorder,
                   disabledBorder: disableBorder,
                   focusedBorder: widget.readOnly ? disableBorder : border,
                   errorBorder: errorBorder,
                   focusedErrorBorder: errorBorder,
-
-                  // Стили текста
                   errorStyle: const TextStyle(height: 0),
                   labelStyle: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         fontSize: widget.height /
