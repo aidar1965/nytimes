@@ -10,6 +10,7 @@ Auto Route (navigation),
 Di (dependency injection),
 Isar (local db),
 Bloc with Freezed (state management)
+Workmanager with Local notifications (background task)
 
 
 1. Showing a list of articles.
