@@ -1,16 +1,25 @@
 # nytimes
 
-A new Flutter project.
+Demo App
 
-## Getting Started
+API: https://developer.nytimes.com/docs/articlesearch-product/1/overview
 
-This project is a starting point for a Flutter application.
+Stack: 
+Dio (http requests),
+Auto Route (navigation),
+Di (dependency injection),
+Isar (local db),
+Bloc with Freezed (state management)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+1. Showing a list of all articles.
+2. Pagination.
+3. Filtering articles by sections.
+4. Display the full version of the article in WebView
+5. Periodic update list of articles.
+6. Saving last 40 articles to Isar db
+7. Select and save locally favorite sections. Background periodic fetch new articles in this sections.
+  Local notification is displayed on new article published in selected sections. The article is displayed 
+  on click on the notification.
+8. Search for articles that are saved locally.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
