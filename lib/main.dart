@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
       initializationSettings,
       onSelectNotification: onSelectNotification,
     );
-    workManager.initialize(callbackDispatcher, isInDebugMode: true);
+    workManager.initialize(callbackDispatcher);
     workManager.registerPeriodicTask(
       "background_service",
       myTask,

@@ -18,9 +18,9 @@ import 'news_list_item/news_list_item.dart';
 
 @RoutePage()
 class NewsListScreen extends StatefulWidget {
-  const NewsListScreen({super.key, this.needToReload});
-
-  final bool? needToReload;
+  const NewsListScreen({
+    super.key,
+  });
 
   @override
   State<NewsListScreen> createState() => _NewsListScreenState();
@@ -37,7 +37,7 @@ class _NewsListScreenState extends State<NewsListScreen> {
 
   @override
   void didChangeDependencies() {
-    _bloc = Di.of(context).buildNewsListBloc(widget.needToReload);
+    _bloc = Di.of(context).buildNewsListBloc();
     _bloc.add(const NewsListEvent.dataRequested());
     super.didChangeDependencies();
   }

@@ -11,7 +11,6 @@ import 'package:flutter/widgets.dart';
 import 'package:nytimes/domain/interfaces/i_api.dart';
 import 'package:nytimes/domain/interfaces/i_articles_repository.dart';
 import 'package:nytimes/domain/interfaces/i_favorites_repository.dart';
-import 'package:nytimes/domain/interfaces/i_local_db.dart';
 import 'package:nytimes/presentation/screens/favorites/bloc/favorites_bloc.dart';
 import 'package:nytimes/presentation/screens/news_list/bloc/news_list_bloc.dart';
 
@@ -55,12 +54,9 @@ class Di extends InheritedWidget {
 
   // ---------------------------------------------------------------------------
   NewsListBloc buildNewsListBloc(
-    bool? needToReload, 
   ) => NewsListBloc(
-      needToReload, 
       api: g<IApi>(),
       articlesRepository: g<IArticlesRepository>(),
-      localDb: g<ILocalDb>(),
     );
 
 }
