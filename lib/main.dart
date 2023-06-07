@@ -18,9 +18,7 @@ import 'presentation/theme/themes.dart';
 import 'domain/environment/di.dart';
 import 'domain/environment/environment.dart';
 
-part 'domain/workmanager/workmanager.dart';
-
-/// part 'domain/background_service/background_service.dart';
+part 'domain/workmanager_service/workmanager_service.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env");
@@ -50,7 +48,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ///  WidgetsFlutterBinding.ensureInitialized();
     flutterLocalNotificationsPlugin.initialize(
       initializationSettings,
       onSelectNotification: onSelectNotification,
