@@ -175,7 +175,7 @@ class _NewsListViewState extends State<NewsListView> {
                     Scaffold.of(context).openEndDrawer();
                   },
                   icon: const Icon(
-                    CustomIcons.filter,
+                    Icons.filter,
                     size: 10,
                   ));
             })

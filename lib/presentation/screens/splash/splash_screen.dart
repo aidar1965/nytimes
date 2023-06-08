@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../generated/locale_keys.g.dart';
 import '../../constants/palette.dart';
 import '../../router/app_router.dart';
+import '../../theme/custom_icons.dart';
 
 @RoutePage()
 class SplashScreen extends StatelessWidget {
@@ -31,29 +32,67 @@ class SplashScreen extends StatelessWidget {
         //alternatively you could use a global key
         return Scaffold(
             body: child,
-            bottomNavigationBar: BottomNavigationBar(
-              currentIndex: tabsRouter.activeIndex,
-              unselectedItemColor: Palette.primary40,
-              unselectedIconTheme:
-                  const IconThemeData(color: Palette.primary40),
-              selectedItemColor: Palette.primary60,
-              showSelectedLabels: false,
-              selectedIconTheme:
-                  const IconThemeData(color: Palette.primary60, size: 30),
-              onTap: (index) {
-                // here we switch between tabs
-                tabsRouter.setActiveIndex(index);
-              },
-              items: [
-                BottomNavigationBarItem(
-                  icon: const Icon(Icons.view_list_outlined),
-                  label: LocaleKeys.bottomNavigationArticles.tr(),
+            bottomNavigationBar: Container(
+              height: 96,
+              decoration: const BoxDecoration(
+                  color: Palette.background,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Palette.tabBarShadow,
+                      offset: Offset(0, -1),
+                    ),
+                  ]),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(12),
+                    topRight: Radius.circular(12)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: BottomNavigationBar(
+                        currentIndex: tabsRouter.activeIndex,
+                        unselectedItemColor: Palette.tabBar,
+                        unselectedIconTheme: const IconThemeData(
+                            color: Palette.primary40, size: 24),
+                        selectedItemColor: Palette.tabBarActive,
+                        showSelectedLabels: false,
+                        showUnselectedLabels: false,
+                        selectedIconTheme: const IconThemeData(
+                            color: Palette.tabBarActive, size: 24),
+                        onTap: (index) {
+                          // here we switch between tabs
+                          tabsRouter.setActiveIndex(index);
+                        },
+                        items: [
+                          BottomNavigationBarItem(
+                            icon: const Icon(CustomIcons.home),
+                            label: LocaleKeys.bottomNavigationArticles.tr(),
+                          ),
+                          BottomNavigationBarItem(
+                            icon: const Icon(CustomIcons.sections),
+                            label: LocaleKeys.bottomNavigationFavorites.tr(),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Container(
+                        height: 5,
+                        width: 134,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(2.5),
+                            color: Color(0xffdcdcde)),
+                      ),
+                    )
+                  ],
                 ),
-                BottomNavigationBarItem(
-                  icon: const Icon(Icons.favorite_border_outlined),
-                  label: LocaleKeys.bottomNavigationFavorites.tr(),
-                ),
-              ],
+              ),
             ));
       },
     );

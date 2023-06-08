@@ -12,5 +12,6 @@ abstract class  LocaleKeys {
   static const screenNewsListSearchFilter = 'screenNewsListSearchFilter';
   static const screenNewsListClearFilters = 'screenNewsListClearFilters';
   static const screenFavoritesTitle = 'screenFavoritesTitle';
+  static const screenFavoritesSubtitle = 'screenFavoritesSubtitle';
 
 }

@@ -10,26 +10,25 @@ class Palette {
   // https://gist.github.com/lopspower/03fb1cc0ac9f32ef38f4 - opacity to color table
   static const MaterialColor primarySwatch =
       MaterialColor(_palettePrimaryValue, <int, Color>{
-    50: Color(0xFFe1e8f1),
-    100: Color(0xFFb4c6db),
-    200: Color(0xFF82a0c4),
-    300: Color(0xFF4f7aac),
-    400: Color(0xFF2a5e9a),
+    50: Color(0xFFE9EBFA),
+    100: Color(0xFFC8CEF3),
+    200: Color(0xFFA3ADEB),
+    300: Color(0xFF7E8CE3),
+    400: Color(0xFF6373DD),
     500: Color(_palettePrimaryValue),
-    600: Color(0xFF033b80),
-    700: Color(0xFF033275),
-    800: Color(0xFF022a6b),
-    900: Color(0xFF011c58),
+    600: Color(0xFF4052D3),
+    700: Color(0xFF3748CD),
+    800: Color(0xFF2F3FC7),
+    900: Color(0xFF202EBE),
   });
 
   static const accent = Color(_palettePrimaryValue);
-  static const background = Color(0xffF1F2F5);
-  static const text = Color(0xff1C1C1C);
+  static const background = Color(0xffffffff);
+  static const text = Color(0xff666C8E);
   static const icon = Color(0xff1C1C1C);
-  static const blackArrow = Color(0xff111111);
-  static const textOrange = Color(0xffE37F09);
+
   static const clean = Color(0xffffffff);
-  static const primary60 = Color(0xff638AAF);
+
   static const primary100 = Color(0xff044188);
   static const primary80 = Color(0xff059DC2);
   static const primary40 = Color(0xffA8B8C1);
@@ -40,8 +39,10 @@ class Palette {
   static const subtitles40 = Color(0xff9C9B9B);
   static const success = Color(0xff02BD15);
 
-  static const tabBarActive = Color(0xffF1F2F5);
-  static const tabBar = Color(0xffffffff);
+  static const tabBarActive = Color(_palettePrimaryValue);
+  static const tabBar = Color(0xffACAFC3);
+
+  static const tabBarShadow = Color(0x52ACAFC3);
 
   static const textLight = Color(0xff5E5D5D);
 

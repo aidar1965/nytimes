@@ -37,13 +37,13 @@ class CommonFunctions {
   static String fromSection(Section section) {
     switch (section) {
       case Section.Arts:
-        return 'Arts';
+        return '🎨 Arts';
       case Section.Automobiles:
         return 'Automobiles';
       case Section.Autos:
         return 'Autos';
       case Section.Blogs:
-        return 'Blogs';
+        return '🌞Blogs';
       case Section.Books:
         return 'Books';
       case Section.Booming:
@@ -109,7 +109,7 @@ class CommonFunctions {
       case Section.Obituaries:
         return 'Obituaries';
       case Section.Olympics:
-        return 'Olympics';
+        return '🏈 Olympics';
       case Section.Open:
         return 'Open';
       case Section.Opinion:
@@ -123,7 +123,7 @@ class CommonFunctions {
       case Section.Science:
         return 'Science';
       case Section.Sports:
-        return 'Sports';
+        return '🏈 Sports';
       case Section.Style:
         return 'Style';
       case Section.SundayMagazine:
