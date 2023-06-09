@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marquee/marquee.dart';
 
 import '../../../data/api/models/section.dart';
 import '../../../domain/environment/di.dart';
@@ -95,11 +96,12 @@ class _NewsListViewState extends State<NewsListView> {
   double maxScrollPosition = -1;
   late double scrollPaginationOffset;
 
-  final textEditingController = TextEditingController();
+  late TextEditingController textEditingController;
 
   @override
   void initState() {
     super.initState();
+    textEditingController = TextEditingController();
     _scrollController = ScrollController();
   }
 
@@ -107,6 +109,7 @@ class _NewsListViewState extends State<NewsListView> {
   void dispose() {
     super.dispose();
     _scrollController.dispose();
+    textEditingController.dispose();
   }
 
   @override
@@ -133,192 +136,173 @@ class _NewsListViewState extends State<NewsListView> {
         BlocProvider.of<NewsListBloc>(context)
             .add(const NewsListEvent.refresh());
       },
-      child: Scaffold(
-        endDrawer: Drawer(
-            child: _SectionListView(selectedSection: widget.selectedSection)),
-        appBar: AppBar(
-          centerTitle: true,
-          elevation: 0,
-          title: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InkWell(
-                onTap: () => BlocProvider.of<NewsListBloc>(context).add(
-                  const NewsListEvent.dataRequested(),
-                ),
-                child: Text(
-                  LocaleKeys.screenNewsListTitle.tr(),
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(fontWeight: FontWeight.bold),
-                ),
-              ),
-              if (widget.selectedSection != null)
-                Flexible(
-                  fit: FlexFit.loose,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 4),
-                    child: Text(
-                      '${LocaleKeys.screenNewsListCategory.tr()} ${CommonFunctions.fromSection(widget.selectedSection!)}',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
+      child: SafeArea(
+        child: Scaffold(
+          body: CustomScrollView(
+            controller: _scrollController,
+            slivers: [
+              const SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 16, top: 43, bottom: 8),
+                  child: Text(
+                    'Browse',
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xff333647)),
                   ),
                 ),
+              ),
+              const SliverToBoxAdapter(
+                child: Padding(
+                  padding: EdgeInsets.only(left: 16, bottom: 8),
+                  child: Text(
+                    'Discover things of this world',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xff7C82A1)),
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+                  child: CommonEditField(
+                    controller: textEditingController,
+                    hintText: 'Search',
+                    prefixIcon: const Icon(CustomIcons.search,
+                        size: 20, color: Color(0xff7C82A1)),
+                    backgroundColor: const Color(0xffF3F4F6),
+                    borderColor: Colors.transparent,
+                    onTapOutside: (event) {
+                      FocusManager.instance.primaryFocus?.unfocus();
+                    },
+                    onChanged: (t) {
+                      BlocProvider.of<NewsListBloc>(context)
+                          .add(NewsListEvent.searchTextChanged(text: t));
+                    },
+                  ),
+                ),
+              ),
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 24),
+              ),
+              SliverToBoxAdapter(
+                child: SizedBox(
+                    height: 32,
+                    child: ListView.builder(
+                        itemCount: Section.values.length + 1,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: ((context, index) {
+                          return index == 0
+                              ? SectionButton(
+                                  text: 'All categories',
+                                  isSelected: widget.selectedSection == null,
+                                  onTap: () {
+                                    BlocProvider.of<NewsListBloc>(context).add(
+                                        const NewsListEvent.sectionSelected(
+                                            selectedSection: null));
+                                  },
+                                )
+                              : SectionButton(
+                                  text: CommonFunctions.fromSection(
+                                      Section.values.elementAt(index - 1)),
+                                  isSelected: widget.selectedSection ==
+                                      Section.values.elementAt(index - 1),
+                                  onTap: () {
+                                    BlocProvider.of<NewsListBloc>(context).add(
+                                        NewsListEvent.sectionSelected(
+                                            selectedSection: Section.values
+                                                .elementAt(index - 1)));
+                                  },
+                                );
+                        }))),
+              ),
+              widget.isPending == false
+                  ? SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        childCount: widget.articles.length,
+                        (context, index) => Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            NewsListItem(
+                              article: widget.articles.elementAt(index),
+                              isConnected: widget.isConnected,
+                            ),
+                            const Divider(height: 1, color: Palette.divider)
+                          ],
+                        ),
+                      ),
+                    )
+                  : const SliverFillRemaining(
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
             ],
           ),
-          actions: [
-            Builder(builder: (context) {
-              return IconButton(
-                  onPressed: () {
-                    Scaffold.of(context).openEndDrawer();
-                  },
-                  icon: const Icon(
-                    Icons.filter,
-                    size: 10,
-                  ));
-            })
-          ],
-        ),
-        body: CustomScrollView(
-          controller: _scrollController,
-          slivers: [
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: CommonEditField(
-                        controller: textEditingController,
-                        hintText: LocaleKeys.screenNewsListSearchLocally.tr(),
-                        onTapOutside: (event) {
-                          FocusManager.instance.primaryFocus?.unfocus();
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      height: Constants.inputFieldDefaultHeight,
-                      child: IconButton(
-                          color: Palette.divider,
-                          onPressed: () {
-                            BlocProvider.of<NewsListBloc>(context).add(
-                              NewsListEvent.search(
-                                  text: textEditingController.text),
-                            );
-                          },
-                          icon: const Icon(
-                            CustomIcons.search,
-                            color: Palette.textLight,
-                          )),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            widget.isPending == false
-                ? SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      childCount: widget.articles.length,
-                      (context, index) => Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          NewsListItem(
-                            article: widget.articles.elementAt(index),
-                            isConnected: widget.isConnected,
-                          ),
-                          const Divider(height: 1, color: Palette.divider)
-                        ],
-                      ),
-                    ),
-                  )
-                : const SliverFillRemaining(
-                    child: Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                  ),
-          ],
         ),
       ),
     );
   }
 }
 
-class _SectionListView extends StatefulWidget {
-  const _SectionListView({super.key, this.selectedSection});
+class SectionButton extends StatelessWidget {
+  const SectionButton(
+      {super.key,
+      required this.text,
+      required this.isSelected,
+      required this.onTap});
 
-  final Section? selectedSection;
-
-  @override
-  State<_SectionListView> createState() => _SectionListViewState();
-}
-
-class _SectionListViewState extends State<_SectionListView> {
-  Section? selectedSection;
-
-  @override
-  void initState() {
-    super.initState();
-    selectedSection = widget.selectedSection;
-  }
+  final String text;
+  final bool isSelected;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 60,
-        ),
-        Text(
-          LocaleKeys.screenNewsListSearchFilter.tr(),
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
-        if (selectedSection != null)
-          SizedBox(
-            height: 40,
-            child: RadioListTile(
-                title: Text(LocaleKeys.screenNewsListClearFilters.tr()),
-                value: null,
-                groupValue: selectedSection,
-                onChanged: (section) {
-                  setState(() {
-                    selectedSection = section;
-                  });
-                  BlocProvider.of<NewsListBloc>(context).add(
-                      const NewsListEvent.sectionSelected(
-                          selectedSection: null));
-                  Scaffold.of(context).closeEndDrawer();
-                }),
-          ),
-        Expanded(
-          child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: Section.values.length,
-              itemBuilder: (context, index) {
-                return SizedBox(
-                  height: 40,
-                  child: RadioListTile(
-                      title: Text(
-                        CommonFunctions.fromSection(
-                          Section.values.elementAt(index),
-                        ),
-                      ),
-                      value: Section.values.elementAt(index),
-                      groupValue: selectedSection,
-                      onChanged: (section) {
-                        setState(() {
-                          selectedSection = section;
-                        });
-                        BlocProvider.of<NewsListBloc>(context).add(
-                            NewsListEvent.sectionSelected(
-                                selectedSection: selectedSection));
-                        Scaffold.of(context).closeEndDrawer();
-                      }),
-                );
-              }),
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(left: 16),
+      child: Ink(
+          height: 32,
+          decoration: BoxDecoration(
+              color: isSelected
+                  ? const Color(0xff475AD7)
+                  : const Color(0xffF3F4F6),
+              borderRadius: BorderRadius.circular(16)),
+          child: InkWell(
+              onTap: () {
+                onTap();
+              },
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16, right: 16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      text.length > 16
+                          ? SizedBox(
+                              width: 120,
+                              child: Marquee(
+                                  text: text,
+                                  blankSpace: 24,
+                                  pauseAfterRound: const Duration(seconds: 3),
+                                  style: TextStyle(
+                                    color: isSelected
+                                        ? Palette.background
+                                        : Palette.text,
+                                  )),
+                            )
+                          : Text(text,
+                              style: TextStyle(
+                                color: isSelected
+                                    ? Palette.background
+                                    : Palette.text,
+                              )),
+                    ],
+                  ),
+                ),
+              ))),
     );
   }
 }

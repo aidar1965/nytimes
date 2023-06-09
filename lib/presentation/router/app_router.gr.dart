@@ -31,6 +31,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    FavoritesRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const FavoritesScreen(),
+      );
+    },
     NewsListRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -41,12 +47,6 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const SplashScreen(),
-      );
-    },
-    FavoritesRoute.name: (routeData) {
-      return AutoRoutePage<dynamic>(
-        routeData: routeData,
-        child: const FavoritesScreen(),
       );
     },
   };
@@ -105,6 +105,20 @@ class ArticleRouteArgs {
 }
 
 /// generated route for
+/// [FavoritesScreen]
+class FavoritesRoute extends PageRouteInfo<void> {
+  const FavoritesRoute({List<PageRouteInfo>? children})
+      : super(
+          FavoritesRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'FavoritesRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [NewsListScreen]
 class NewsListRoute extends PageRouteInfo<void> {
   const NewsListRoute({List<PageRouteInfo>? children})
@@ -128,20 +142,6 @@ class SplashRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'SplashRoute';
-
-  static const PageInfo<void> page = PageInfo<void>(name);
-}
-
-/// generated route for
-/// [FavoritesScreen]
-class FavoritesRoute extends PageRouteInfo<void> {
-  const FavoritesRoute({List<PageRouteInfo>? children})
-      : super(
-          FavoritesRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'FavoritesRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

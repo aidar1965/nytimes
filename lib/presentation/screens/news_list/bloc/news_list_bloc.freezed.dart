@@ -19,69 +19,76 @@ mixin _$NewsListEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int? page) dataRequested,
-    required TResult Function(String text) search,
+    required TResult Function(String text) searchTextChanged,
     required TResult Function() refresh,
     required TResult Function(Section? selectedSection) sectionSelected,
     required TResult Function(ConnectivityResult connectivityResult)
         onConnectivityChanged,
     required TResult Function(List<Article>? articles) onLocalArticlesChanged,
+    required TResult Function() searchParamsChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int? page)? dataRequested,
-    TResult? Function(String text)? search,
+    TResult? Function(String text)? searchTextChanged,
     TResult? Function()? refresh,
     TResult? Function(Section? selectedSection)? sectionSelected,
     TResult? Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
     TResult? Function(List<Article>? articles)? onLocalArticlesChanged,
+    TResult? Function()? searchParamsChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int? page)? dataRequested,
-    TResult Function(String text)? search,
+    TResult Function(String text)? searchTextChanged,
     TResult Function()? refresh,
     TResult Function(Section? selectedSection)? sectionSelected,
     TResult Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
     TResult Function(List<Article>? articles)? onLocalArticlesChanged,
+    TResult Function()? searchParamsChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EventDataRequested value) dataRequested,
-    required TResult Function(_EventSearch value) search,
+    required TResult Function(_EventSearch value) searchTextChanged,
     required TResult Function(_EventRefresh value) refresh,
     required TResult Function(_EventSectionSelected value) sectionSelected,
     required TResult Function(_EventConnectivityChanged value)
         onConnectivityChanged,
     required TResult Function(_EventOnLocalArticlesChanged value)
         onLocalArticlesChanged,
+    required TResult Function(_EventOnSearchParamsChanged value)
+        searchParamsChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EventDataRequested value)? dataRequested,
-    TResult? Function(_EventSearch value)? search,
+    TResult? Function(_EventSearch value)? searchTextChanged,
     TResult? Function(_EventRefresh value)? refresh,
     TResult? Function(_EventSectionSelected value)? sectionSelected,
     TResult? Function(_EventConnectivityChanged value)? onConnectivityChanged,
     TResult? Function(_EventOnLocalArticlesChanged value)?
         onLocalArticlesChanged,
+    TResult? Function(_EventOnSearchParamsChanged value)? searchParamsChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EventDataRequested value)? dataRequested,
-    TResult Function(_EventSearch value)? search,
+    TResult Function(_EventSearch value)? searchTextChanged,
     TResult Function(_EventRefresh value)? refresh,
     TResult Function(_EventSectionSelected value)? sectionSelected,
     TResult Function(_EventConnectivityChanged value)? onConnectivityChanged,
     TResult Function(_EventOnLocalArticlesChanged value)?
         onLocalArticlesChanged,
+    TResult Function(_EventOnSearchParamsChanged value)? searchParamsChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -171,12 +178,13 @@ class _$_EventDataRequested implements _EventDataRequested {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int? page) dataRequested,
-    required TResult Function(String text) search,
+    required TResult Function(String text) searchTextChanged,
     required TResult Function() refresh,
     required TResult Function(Section? selectedSection) sectionSelected,
     required TResult Function(ConnectivityResult connectivityResult)
         onConnectivityChanged,
     required TResult Function(List<Article>? articles) onLocalArticlesChanged,
+    required TResult Function() searchParamsChanged,
   }) {
     return dataRequested(page);
   }
@@ -185,12 +193,13 @@ class _$_EventDataRequested implements _EventDataRequested {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int? page)? dataRequested,
-    TResult? Function(String text)? search,
+    TResult? Function(String text)? searchTextChanged,
     TResult? Function()? refresh,
     TResult? Function(Section? selectedSection)? sectionSelected,
     TResult? Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
     TResult? Function(List<Article>? articles)? onLocalArticlesChanged,
+    TResult? Function()? searchParamsChanged,
   }) {
     return dataRequested?.call(page);
   }
@@ -199,12 +208,13 @@ class _$_EventDataRequested implements _EventDataRequested {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int? page)? dataRequested,
-    TResult Function(String text)? search,
+    TResult Function(String text)? searchTextChanged,
     TResult Function()? refresh,
     TResult Function(Section? selectedSection)? sectionSelected,
     TResult Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
     TResult Function(List<Article>? articles)? onLocalArticlesChanged,
+    TResult Function()? searchParamsChanged,
     required TResult orElse(),
   }) {
     if (dataRequested != null) {
@@ -217,13 +227,15 @@ class _$_EventDataRequested implements _EventDataRequested {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EventDataRequested value) dataRequested,
-    required TResult Function(_EventSearch value) search,
+    required TResult Function(_EventSearch value) searchTextChanged,
     required TResult Function(_EventRefresh value) refresh,
     required TResult Function(_EventSectionSelected value) sectionSelected,
     required TResult Function(_EventConnectivityChanged value)
         onConnectivityChanged,
     required TResult Function(_EventOnLocalArticlesChanged value)
         onLocalArticlesChanged,
+    required TResult Function(_EventOnSearchParamsChanged value)
+        searchParamsChanged,
   }) {
     return dataRequested(this);
   }
@@ -232,12 +244,13 @@ class _$_EventDataRequested implements _EventDataRequested {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EventDataRequested value)? dataRequested,
-    TResult? Function(_EventSearch value)? search,
+    TResult? Function(_EventSearch value)? searchTextChanged,
     TResult? Function(_EventRefresh value)? refresh,
     TResult? Function(_EventSectionSelected value)? sectionSelected,
     TResult? Function(_EventConnectivityChanged value)? onConnectivityChanged,
     TResult? Function(_EventOnLocalArticlesChanged value)?
         onLocalArticlesChanged,
+    TResult? Function(_EventOnSearchParamsChanged value)? searchParamsChanged,
   }) {
     return dataRequested?.call(this);
   }
@@ -246,12 +259,13 @@ class _$_EventDataRequested implements _EventDataRequested {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EventDataRequested value)? dataRequested,
-    TResult Function(_EventSearch value)? search,
+    TResult Function(_EventSearch value)? searchTextChanged,
     TResult Function(_EventRefresh value)? refresh,
     TResult Function(_EventSectionSelected value)? sectionSelected,
     TResult Function(_EventConnectivityChanged value)? onConnectivityChanged,
     TResult Function(_EventOnLocalArticlesChanged value)?
         onLocalArticlesChanged,
+    TResult Function(_EventOnSearchParamsChanged value)? searchParamsChanged,
     required TResult orElse(),
   }) {
     if (dataRequested != null) {
@@ -311,7 +325,7 @@ class _$_EventSearch implements _EventSearch {
 
   @override
   String toString() {
-    return 'NewsListEvent.search(text: $text)';
+    return 'NewsListEvent.searchTextChanged(text: $text)';
   }
 
   @override
@@ -335,44 +349,47 @@ class _$_EventSearch implements _EventSearch {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int? page) dataRequested,
-    required TResult Function(String text) search,
+    required TResult Function(String text) searchTextChanged,
     required TResult Function() refresh,
     required TResult Function(Section? selectedSection) sectionSelected,
     required TResult Function(ConnectivityResult connectivityResult)
         onConnectivityChanged,
     required TResult Function(List<Article>? articles) onLocalArticlesChanged,
+    required TResult Function() searchParamsChanged,
   }) {
-    return search(text);
+    return searchTextChanged(text);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int? page)? dataRequested,
-    TResult? Function(String text)? search,
+    TResult? Function(String text)? searchTextChanged,
     TResult? Function()? refresh,
     TResult? Function(Section? selectedSection)? sectionSelected,
     TResult? Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
     TResult? Function(List<Article>? articles)? onLocalArticlesChanged,
+    TResult? Function()? searchParamsChanged,
   }) {
-    return search?.call(text);
+    return searchTextChanged?.call(text);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int? page)? dataRequested,
-    TResult Function(String text)? search,
+    TResult Function(String text)? searchTextChanged,
     TResult Function()? refresh,
     TResult Function(Section? selectedSection)? sectionSelected,
     TResult Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
     TResult Function(List<Article>? articles)? onLocalArticlesChanged,
+    TResult Function()? searchParamsChanged,
     required TResult orElse(),
   }) {
-    if (search != null) {
-      return search(text);
+    if (searchTextChanged != null) {
+      return searchTextChanged(text);
     }
     return orElse();
   }
@@ -381,45 +398,49 @@ class _$_EventSearch implements _EventSearch {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EventDataRequested value) dataRequested,
-    required TResult Function(_EventSearch value) search,
+    required TResult Function(_EventSearch value) searchTextChanged,
     required TResult Function(_EventRefresh value) refresh,
     required TResult Function(_EventSectionSelected value) sectionSelected,
     required TResult Function(_EventConnectivityChanged value)
         onConnectivityChanged,
     required TResult Function(_EventOnLocalArticlesChanged value)
         onLocalArticlesChanged,
+    required TResult Function(_EventOnSearchParamsChanged value)
+        searchParamsChanged,
   }) {
-    return search(this);
+    return searchTextChanged(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EventDataRequested value)? dataRequested,
-    TResult? Function(_EventSearch value)? search,
+    TResult? Function(_EventSearch value)? searchTextChanged,
     TResult? Function(_EventRefresh value)? refresh,
     TResult? Function(_EventSectionSelected value)? sectionSelected,
     TResult? Function(_EventConnectivityChanged value)? onConnectivityChanged,
     TResult? Function(_EventOnLocalArticlesChanged value)?
         onLocalArticlesChanged,
+    TResult? Function(_EventOnSearchParamsChanged value)? searchParamsChanged,
   }) {
-    return search?.call(this);
+    return searchTextChanged?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EventDataRequested value)? dataRequested,
-    TResult Function(_EventSearch value)? search,
+    TResult Function(_EventSearch value)? searchTextChanged,
     TResult Function(_EventRefresh value)? refresh,
     TResult Function(_EventSectionSelected value)? sectionSelected,
     TResult Function(_EventConnectivityChanged value)? onConnectivityChanged,
     TResult Function(_EventOnLocalArticlesChanged value)?
         onLocalArticlesChanged,
+    TResult Function(_EventOnSearchParamsChanged value)? searchParamsChanged,
     required TResult orElse(),
   }) {
-    if (search != null) {
-      return search(this);
+    if (searchTextChanged != null) {
+      return searchTextChanged(this);
     }
     return orElse();
   }
@@ -473,12 +494,13 @@ class _$_EventRefresh implements _EventRefresh {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int? page) dataRequested,
-    required TResult Function(String text) search,
+    required TResult Function(String text) searchTextChanged,
     required TResult Function() refresh,
     required TResult Function(Section? selectedSection) sectionSelected,
     required TResult Function(ConnectivityResult connectivityResult)
         onConnectivityChanged,
     required TResult Function(List<Article>? articles) onLocalArticlesChanged,
+    required TResult Function() searchParamsChanged,
   }) {
     return refresh();
   }
@@ -487,12 +509,13 @@ class _$_EventRefresh implements _EventRefresh {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int? page)? dataRequested,
-    TResult? Function(String text)? search,
+    TResult? Function(String text)? searchTextChanged,
     TResult? Function()? refresh,
     TResult? Function(Section? selectedSection)? sectionSelected,
     TResult? Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
     TResult? Function(List<Article>? articles)? onLocalArticlesChanged,
+    TResult? Function()? searchParamsChanged,
   }) {
     return refresh?.call();
   }
@@ -501,12 +524,13 @@ class _$_EventRefresh implements _EventRefresh {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int? page)? dataRequested,
-    TResult Function(String text)? search,
+    TResult Function(String text)? searchTextChanged,
     TResult Function()? refresh,
     TResult Function(Section? selectedSection)? sectionSelected,
     TResult Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
     TResult Function(List<Article>? articles)? onLocalArticlesChanged,
+    TResult Function()? searchParamsChanged,
     required TResult orElse(),
   }) {
     if (refresh != null) {
@@ -519,13 +543,15 @@ class _$_EventRefresh implements _EventRefresh {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EventDataRequested value) dataRequested,
-    required TResult Function(_EventSearch value) search,
+    required TResult Function(_EventSearch value) searchTextChanged,
     required TResult Function(_EventRefresh value) refresh,
     required TResult Function(_EventSectionSelected value) sectionSelected,
     required TResult Function(_EventConnectivityChanged value)
         onConnectivityChanged,
     required TResult Function(_EventOnLocalArticlesChanged value)
         onLocalArticlesChanged,
+    required TResult Function(_EventOnSearchParamsChanged value)
+        searchParamsChanged,
   }) {
     return refresh(this);
   }
@@ -534,12 +560,13 @@ class _$_EventRefresh implements _EventRefresh {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EventDataRequested value)? dataRequested,
-    TResult? Function(_EventSearch value)? search,
+    TResult? Function(_EventSearch value)? searchTextChanged,
     TResult? Function(_EventRefresh value)? refresh,
     TResult? Function(_EventSectionSelected value)? sectionSelected,
     TResult? Function(_EventConnectivityChanged value)? onConnectivityChanged,
     TResult? Function(_EventOnLocalArticlesChanged value)?
         onLocalArticlesChanged,
+    TResult? Function(_EventOnSearchParamsChanged value)? searchParamsChanged,
   }) {
     return refresh?.call(this);
   }
@@ -548,12 +575,13 @@ class _$_EventRefresh implements _EventRefresh {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EventDataRequested value)? dataRequested,
-    TResult Function(_EventSearch value)? search,
+    TResult Function(_EventSearch value)? searchTextChanged,
     TResult Function(_EventRefresh value)? refresh,
     TResult Function(_EventSectionSelected value)? sectionSelected,
     TResult Function(_EventConnectivityChanged value)? onConnectivityChanged,
     TResult Function(_EventOnLocalArticlesChanged value)?
         onLocalArticlesChanged,
+    TResult Function(_EventOnSearchParamsChanged value)? searchParamsChanged,
     required TResult orElse(),
   }) {
     if (refresh != null) {
@@ -634,12 +662,13 @@ class _$_EventSectionSelected implements _EventSectionSelected {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int? page) dataRequested,
-    required TResult Function(String text) search,
+    required TResult Function(String text) searchTextChanged,
     required TResult Function() refresh,
     required TResult Function(Section? selectedSection) sectionSelected,
     required TResult Function(ConnectivityResult connectivityResult)
         onConnectivityChanged,
     required TResult Function(List<Article>? articles) onLocalArticlesChanged,
+    required TResult Function() searchParamsChanged,
   }) {
     return sectionSelected(selectedSection);
   }
@@ -648,12 +677,13 @@ class _$_EventSectionSelected implements _EventSectionSelected {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int? page)? dataRequested,
-    TResult? Function(String text)? search,
+    TResult? Function(String text)? searchTextChanged,
     TResult? Function()? refresh,
     TResult? Function(Section? selectedSection)? sectionSelected,
     TResult? Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
     TResult? Function(List<Article>? articles)? onLocalArticlesChanged,
+    TResult? Function()? searchParamsChanged,
   }) {
     return sectionSelected?.call(selectedSection);
   }
@@ -662,12 +692,13 @@ class _$_EventSectionSelected implements _EventSectionSelected {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int? page)? dataRequested,
-    TResult Function(String text)? search,
+    TResult Function(String text)? searchTextChanged,
     TResult Function()? refresh,
     TResult Function(Section? selectedSection)? sectionSelected,
     TResult Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
     TResult Function(List<Article>? articles)? onLocalArticlesChanged,
+    TResult Function()? searchParamsChanged,
     required TResult orElse(),
   }) {
     if (sectionSelected != null) {
@@ -680,13 +711,15 @@ class _$_EventSectionSelected implements _EventSectionSelected {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EventDataRequested value) dataRequested,
-    required TResult Function(_EventSearch value) search,
+    required TResult Function(_EventSearch value) searchTextChanged,
     required TResult Function(_EventRefresh value) refresh,
     required TResult Function(_EventSectionSelected value) sectionSelected,
     required TResult Function(_EventConnectivityChanged value)
         onConnectivityChanged,
     required TResult Function(_EventOnLocalArticlesChanged value)
         onLocalArticlesChanged,
+    required TResult Function(_EventOnSearchParamsChanged value)
+        searchParamsChanged,
   }) {
     return sectionSelected(this);
   }
@@ -695,12 +728,13 @@ class _$_EventSectionSelected implements _EventSectionSelected {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EventDataRequested value)? dataRequested,
-    TResult? Function(_EventSearch value)? search,
+    TResult? Function(_EventSearch value)? searchTextChanged,
     TResult? Function(_EventRefresh value)? refresh,
     TResult? Function(_EventSectionSelected value)? sectionSelected,
     TResult? Function(_EventConnectivityChanged value)? onConnectivityChanged,
     TResult? Function(_EventOnLocalArticlesChanged value)?
         onLocalArticlesChanged,
+    TResult? Function(_EventOnSearchParamsChanged value)? searchParamsChanged,
   }) {
     return sectionSelected?.call(this);
   }
@@ -709,12 +743,13 @@ class _$_EventSectionSelected implements _EventSectionSelected {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EventDataRequested value)? dataRequested,
-    TResult Function(_EventSearch value)? search,
+    TResult Function(_EventSearch value)? searchTextChanged,
     TResult Function(_EventRefresh value)? refresh,
     TResult Function(_EventSectionSelected value)? sectionSelected,
     TResult Function(_EventConnectivityChanged value)? onConnectivityChanged,
     TResult Function(_EventOnLocalArticlesChanged value)?
         onLocalArticlesChanged,
+    TResult Function(_EventOnSearchParamsChanged value)? searchParamsChanged,
     required TResult orElse(),
   }) {
     if (sectionSelected != null) {
@@ -802,12 +837,13 @@ class _$_EventConnectivityChanged implements _EventConnectivityChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int? page) dataRequested,
-    required TResult Function(String text) search,
+    required TResult Function(String text) searchTextChanged,
     required TResult Function() refresh,
     required TResult Function(Section? selectedSection) sectionSelected,
     required TResult Function(ConnectivityResult connectivityResult)
         onConnectivityChanged,
     required TResult Function(List<Article>? articles) onLocalArticlesChanged,
+    required TResult Function() searchParamsChanged,
   }) {
     return onConnectivityChanged(connectivityResult);
   }
@@ -816,12 +852,13 @@ class _$_EventConnectivityChanged implements _EventConnectivityChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int? page)? dataRequested,
-    TResult? Function(String text)? search,
+    TResult? Function(String text)? searchTextChanged,
     TResult? Function()? refresh,
     TResult? Function(Section? selectedSection)? sectionSelected,
     TResult? Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
     TResult? Function(List<Article>? articles)? onLocalArticlesChanged,
+    TResult? Function()? searchParamsChanged,
   }) {
     return onConnectivityChanged?.call(connectivityResult);
   }
@@ -830,12 +867,13 @@ class _$_EventConnectivityChanged implements _EventConnectivityChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int? page)? dataRequested,
-    TResult Function(String text)? search,
+    TResult Function(String text)? searchTextChanged,
     TResult Function()? refresh,
     TResult Function(Section? selectedSection)? sectionSelected,
     TResult Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
     TResult Function(List<Article>? articles)? onLocalArticlesChanged,
+    TResult Function()? searchParamsChanged,
     required TResult orElse(),
   }) {
     if (onConnectivityChanged != null) {
@@ -848,13 +886,15 @@ class _$_EventConnectivityChanged implements _EventConnectivityChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EventDataRequested value) dataRequested,
-    required TResult Function(_EventSearch value) search,
+    required TResult Function(_EventSearch value) searchTextChanged,
     required TResult Function(_EventRefresh value) refresh,
     required TResult Function(_EventSectionSelected value) sectionSelected,
     required TResult Function(_EventConnectivityChanged value)
         onConnectivityChanged,
     required TResult Function(_EventOnLocalArticlesChanged value)
         onLocalArticlesChanged,
+    required TResult Function(_EventOnSearchParamsChanged value)
+        searchParamsChanged,
   }) {
     return onConnectivityChanged(this);
   }
@@ -863,12 +903,13 @@ class _$_EventConnectivityChanged implements _EventConnectivityChanged {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EventDataRequested value)? dataRequested,
-    TResult? Function(_EventSearch value)? search,
+    TResult? Function(_EventSearch value)? searchTextChanged,
     TResult? Function(_EventRefresh value)? refresh,
     TResult? Function(_EventSectionSelected value)? sectionSelected,
     TResult? Function(_EventConnectivityChanged value)? onConnectivityChanged,
     TResult? Function(_EventOnLocalArticlesChanged value)?
         onLocalArticlesChanged,
+    TResult? Function(_EventOnSearchParamsChanged value)? searchParamsChanged,
   }) {
     return onConnectivityChanged?.call(this);
   }
@@ -877,12 +918,13 @@ class _$_EventConnectivityChanged implements _EventConnectivityChanged {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EventDataRequested value)? dataRequested,
-    TResult Function(_EventSearch value)? search,
+    TResult Function(_EventSearch value)? searchTextChanged,
     TResult Function(_EventRefresh value)? refresh,
     TResult Function(_EventSectionSelected value)? sectionSelected,
     TResult Function(_EventConnectivityChanged value)? onConnectivityChanged,
     TResult Function(_EventOnLocalArticlesChanged value)?
         onLocalArticlesChanged,
+    TResult Function(_EventOnSearchParamsChanged value)? searchParamsChanged,
     required TResult orElse(),
   }) {
     if (onConnectivityChanged != null) {
@@ -980,12 +1022,13 @@ class _$_EventOnLocalArticlesChanged implements _EventOnLocalArticlesChanged {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int? page) dataRequested,
-    required TResult Function(String text) search,
+    required TResult Function(String text) searchTextChanged,
     required TResult Function() refresh,
     required TResult Function(Section? selectedSection) sectionSelected,
     required TResult Function(ConnectivityResult connectivityResult)
         onConnectivityChanged,
     required TResult Function(List<Article>? articles) onLocalArticlesChanged,
+    required TResult Function() searchParamsChanged,
   }) {
     return onLocalArticlesChanged(articles);
   }
@@ -994,12 +1037,13 @@ class _$_EventOnLocalArticlesChanged implements _EventOnLocalArticlesChanged {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int? page)? dataRequested,
-    TResult? Function(String text)? search,
+    TResult? Function(String text)? searchTextChanged,
     TResult? Function()? refresh,
     TResult? Function(Section? selectedSection)? sectionSelected,
     TResult? Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
     TResult? Function(List<Article>? articles)? onLocalArticlesChanged,
+    TResult? Function()? searchParamsChanged,
   }) {
     return onLocalArticlesChanged?.call(articles);
   }
@@ -1008,12 +1052,13 @@ class _$_EventOnLocalArticlesChanged implements _EventOnLocalArticlesChanged {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int? page)? dataRequested,
-    TResult Function(String text)? search,
+    TResult Function(String text)? searchTextChanged,
     TResult Function()? refresh,
     TResult Function(Section? selectedSection)? sectionSelected,
     TResult Function(ConnectivityResult connectivityResult)?
         onConnectivityChanged,
     TResult Function(List<Article>? articles)? onLocalArticlesChanged,
+    TResult Function()? searchParamsChanged,
     required TResult orElse(),
   }) {
     if (onLocalArticlesChanged != null) {
@@ -1026,13 +1071,15 @@ class _$_EventOnLocalArticlesChanged implements _EventOnLocalArticlesChanged {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_EventDataRequested value) dataRequested,
-    required TResult Function(_EventSearch value) search,
+    required TResult Function(_EventSearch value) searchTextChanged,
     required TResult Function(_EventRefresh value) refresh,
     required TResult Function(_EventSectionSelected value) sectionSelected,
     required TResult Function(_EventConnectivityChanged value)
         onConnectivityChanged,
     required TResult Function(_EventOnLocalArticlesChanged value)
         onLocalArticlesChanged,
+    required TResult Function(_EventOnSearchParamsChanged value)
+        searchParamsChanged,
   }) {
     return onLocalArticlesChanged(this);
   }
@@ -1041,12 +1088,13 @@ class _$_EventOnLocalArticlesChanged implements _EventOnLocalArticlesChanged {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_EventDataRequested value)? dataRequested,
-    TResult? Function(_EventSearch value)? search,
+    TResult? Function(_EventSearch value)? searchTextChanged,
     TResult? Function(_EventRefresh value)? refresh,
     TResult? Function(_EventSectionSelected value)? sectionSelected,
     TResult? Function(_EventConnectivityChanged value)? onConnectivityChanged,
     TResult? Function(_EventOnLocalArticlesChanged value)?
         onLocalArticlesChanged,
+    TResult? Function(_EventOnSearchParamsChanged value)? searchParamsChanged,
   }) {
     return onLocalArticlesChanged?.call(this);
   }
@@ -1055,12 +1103,13 @@ class _$_EventOnLocalArticlesChanged implements _EventOnLocalArticlesChanged {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_EventDataRequested value)? dataRequested,
-    TResult Function(_EventSearch value)? search,
+    TResult Function(_EventSearch value)? searchTextChanged,
     TResult Function(_EventRefresh value)? refresh,
     TResult Function(_EventSectionSelected value)? sectionSelected,
     TResult Function(_EventConnectivityChanged value)? onConnectivityChanged,
     TResult Function(_EventOnLocalArticlesChanged value)?
         onLocalArticlesChanged,
+    TResult Function(_EventOnSearchParamsChanged value)? searchParamsChanged,
     required TResult orElse(),
   }) {
     if (onLocalArticlesChanged != null) {
@@ -1078,6 +1127,149 @@ abstract class _EventOnLocalArticlesChanged implements NewsListEvent {
   @JsonKey(ignore: true)
   _$$_EventOnLocalArticlesChangedCopyWith<_$_EventOnLocalArticlesChanged>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_EventOnSearchParamsChangedCopyWith<$Res> {
+  factory _$$_EventOnSearchParamsChangedCopyWith(
+          _$_EventOnSearchParamsChanged value,
+          $Res Function(_$_EventOnSearchParamsChanged) then) =
+      __$$_EventOnSearchParamsChangedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_EventOnSearchParamsChangedCopyWithImpl<$Res>
+    extends _$NewsListEventCopyWithImpl<$Res, _$_EventOnSearchParamsChanged>
+    implements _$$_EventOnSearchParamsChangedCopyWith<$Res> {
+  __$$_EventOnSearchParamsChangedCopyWithImpl(
+      _$_EventOnSearchParamsChanged _value,
+      $Res Function(_$_EventOnSearchParamsChanged) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_EventOnSearchParamsChanged implements _EventOnSearchParamsChanged {
+  const _$_EventOnSearchParamsChanged();
+
+  @override
+  String toString() {
+    return 'NewsListEvent.searchParamsChanged()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_EventOnSearchParamsChanged);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int? page) dataRequested,
+    required TResult Function(String text) searchTextChanged,
+    required TResult Function() refresh,
+    required TResult Function(Section? selectedSection) sectionSelected,
+    required TResult Function(ConnectivityResult connectivityResult)
+        onConnectivityChanged,
+    required TResult Function(List<Article>? articles) onLocalArticlesChanged,
+    required TResult Function() searchParamsChanged,
+  }) {
+    return searchParamsChanged();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int? page)? dataRequested,
+    TResult? Function(String text)? searchTextChanged,
+    TResult? Function()? refresh,
+    TResult? Function(Section? selectedSection)? sectionSelected,
+    TResult? Function(ConnectivityResult connectivityResult)?
+        onConnectivityChanged,
+    TResult? Function(List<Article>? articles)? onLocalArticlesChanged,
+    TResult? Function()? searchParamsChanged,
+  }) {
+    return searchParamsChanged?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int? page)? dataRequested,
+    TResult Function(String text)? searchTextChanged,
+    TResult Function()? refresh,
+    TResult Function(Section? selectedSection)? sectionSelected,
+    TResult Function(ConnectivityResult connectivityResult)?
+        onConnectivityChanged,
+    TResult Function(List<Article>? articles)? onLocalArticlesChanged,
+    TResult Function()? searchParamsChanged,
+    required TResult orElse(),
+  }) {
+    if (searchParamsChanged != null) {
+      return searchParamsChanged();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_EventDataRequested value) dataRequested,
+    required TResult Function(_EventSearch value) searchTextChanged,
+    required TResult Function(_EventRefresh value) refresh,
+    required TResult Function(_EventSectionSelected value) sectionSelected,
+    required TResult Function(_EventConnectivityChanged value)
+        onConnectivityChanged,
+    required TResult Function(_EventOnLocalArticlesChanged value)
+        onLocalArticlesChanged,
+    required TResult Function(_EventOnSearchParamsChanged value)
+        searchParamsChanged,
+  }) {
+    return searchParamsChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_EventDataRequested value)? dataRequested,
+    TResult? Function(_EventSearch value)? searchTextChanged,
+    TResult? Function(_EventRefresh value)? refresh,
+    TResult? Function(_EventSectionSelected value)? sectionSelected,
+    TResult? Function(_EventConnectivityChanged value)? onConnectivityChanged,
+    TResult? Function(_EventOnLocalArticlesChanged value)?
+        onLocalArticlesChanged,
+    TResult? Function(_EventOnSearchParamsChanged value)? searchParamsChanged,
+  }) {
+    return searchParamsChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_EventDataRequested value)? dataRequested,
+    TResult Function(_EventSearch value)? searchTextChanged,
+    TResult Function(_EventRefresh value)? refresh,
+    TResult Function(_EventSectionSelected value)? sectionSelected,
+    TResult Function(_EventConnectivityChanged value)? onConnectivityChanged,
+    TResult Function(_EventOnLocalArticlesChanged value)?
+        onLocalArticlesChanged,
+    TResult Function(_EventOnSearchParamsChanged value)? searchParamsChanged,
+    required TResult orElse(),
+  }) {
+    if (searchParamsChanged != null) {
+      return searchParamsChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _EventOnSearchParamsChanged implements NewsListEvent {
+  const factory _EventOnSearchParamsChanged() = _$_EventOnSearchParamsChanged;
 }
 
 /// @nodoc

@@ -3,7 +3,7 @@ class Constants {
   static const double dialogRadius = 16;
   static const double inputRadius = 8;
   static const double buttonHeight = 54;
-  static const double inputFieldDefaultHeight = 44;
+  static const double inputFieldDefaultHeight = 56;
   static const double buttonBorderWidth = 1;
 
 // NYT API settings used by Dio in http_client.dart

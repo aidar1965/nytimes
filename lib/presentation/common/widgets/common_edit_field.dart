@@ -39,6 +39,7 @@ class CommonEditField extends StatefulWidget {
     Key? key,
     this.onTapOutside,
     this.inputFormatters,
+    this.prefixIcon,
   }) : super(key: key);
 
   final String? hintText;
@@ -47,7 +48,7 @@ class CommonEditField extends StatefulWidget {
   final TextEditingController? controller;
   final bool isMultiline;
   final Color? borderColor;
-
+  final Widget? prefixIcon;
   final bool obscureText;
   final TextCapitalization? textCapitalization;
   final TextInputType? keyboardType;
@@ -243,6 +244,7 @@ class _CommonEditFieldState extends State<CommonEditField> {
                       : EdgeInsets.all(coefficient * 12),
                   isDense: false,
                   counterText: '',
+                  prefixIcon: widget.prefixIcon,
                   filled: true,
                   floatingLabelBehavior: FloatingLabelBehavior.never,
                   fillColor: widget.backgroundColor ?? Palette.background,
@@ -278,28 +280,28 @@ class _CommonEditFieldState extends State<CommonEditField> {
                           : Column(
                               children: [
                                 SizedBox.square(
-                                  dimension: widget.height ==
-                                          Constants.inputFieldDefaultHeight
-                                      ? 40
-                                      : widget.height,
-                                  child: IconButton(
-                                    padding: EdgeInsets.zero,
-                                    icon: Icon(
-                                      Icons.close,
-                                      size: 16 * _textScaleFactor,
-                                      color: Palette.text,
-                                    ),
-                                    onPressed: () {
-                                      _controller.clear();
-                                      widget.onChanged?.call(_controller.text);
-                                      setState(() {
-                                        _error = false;
-                                      });
+                                  dimension: widget.height,
+                                  child: Center(
+                                    child: IconButton(
+                                      padding: EdgeInsets.zero,
+                                      icon: Icon(
+                                        Icons.close,
+                                        size: 16 * _textScaleFactor,
+                                        color: Palette.text,
+                                      ),
+                                      onPressed: () {
+                                        _controller.clear();
+                                        widget.onChanged
+                                            ?.call(_controller.text);
+                                        setState(() {
+                                          _error = false;
+                                        });
 
-                                      if (widget.onClearTap != null) {
-                                        widget.onClearTap!();
-                                      }
-                                    },
+                                        if (widget.onClearTap != null) {
+                                          widget.onClearTap!();
+                                        }
+                                      },
+                                    ),
                                   ),
                                 ),
                               ],

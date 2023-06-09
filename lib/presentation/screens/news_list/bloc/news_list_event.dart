@@ -6,7 +6,7 @@ class NewsListEvent with _$NewsListEvent {
   const factory NewsListEvent.dataRequested({int? page}) = _EventDataRequested;
 
   /// search articles in local db
-  const factory NewsListEvent.search({
+  const factory NewsListEvent.searchTextChanged({
     required String text,
   }) = _EventSearch;
 
@@ -26,4 +26,8 @@ class NewsListEvent with _$NewsListEvent {
   /// listening ArticlesRepository changes
   const factory NewsListEvent.onLocalArticlesChanged(List<Article>? articles) =
       _EventOnLocalArticlesChanged;
+
+  /// listening search changes
+  const factory NewsListEvent.searchParamsChanged() =
+      _EventOnSearchParamsChanged;
 }

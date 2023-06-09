@@ -7,6 +7,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 
 import '../../../../data/api/http_client/request_exception.dart';
 
+import '../../../../domain/common/debouncer.dart';
 import '../../../../domain/interfaces/i_api.dart';
 import '../../../../domain/models/article.dart';
 
@@ -36,9 +37,10 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
         sectionSelected: (event) => _sectionSelected(event, emitter),
         onConnectivityChanged: (event) =>
             _onConnectivityChanged(event, emitter),
-        search: (event) => _localSearch(event, emitter),
+        searchTextChanged: (event) => _localSearch(event, emitter),
         onLocalArticlesChanged: (event) =>
             _onLocalArticlesChanged(event, emitter),
+        searchParamsChanged: (event) => _searchParamsChanged(event, emitter),
       ),
     );
 
@@ -52,6 +54,8 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
     addPeriodicFetch();
     articlesRepositorySubscription =
         articlesRepository.subscribe(onLocalArticlesChanged);
+
+    _debouncer = Debouncer<SearchParams>(callBack: _onDebouncerCalled);
   }
 
   final IApi api;
@@ -89,6 +93,10 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
 
   /// control pagination while displaying local search result
   bool onlyLocalArticles = false;
+
+  late final Debouncer _debouncer;
+
+  var _searchParams = const SearchParams();
 
   /// request articles from server or local database
   Future<void> _dataRequested(
@@ -217,14 +225,13 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
 
   Future<void> _sectionSelected(
       _EventSectionSelected event, Emitter emitter) async {
-    page = 0;
     selectedSection = event.selectedSection;
     emitter(NewsListState.dataReceived(
       articles: articles,
       isConnected: isConnected,
-      isPending: true,
+      selectedSection: selectedSection,
+      isPending: false,
     ));
-    add(const NewsListEvent.dataRequested());
   }
 
   Future<void> _onConnectivityChanged(
@@ -243,7 +250,8 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
   }
 
   Future<void> _localSearch(_EventSearch event, Emitter emitter) async {
-    await articlesRepository.searchArticles(event.text);
+    _searchParams = _searchParams.copyWith(text: event.text);
+    _debouncer.onEvent(_searchParams);
   }
 
   /// update data periodically
@@ -266,6 +274,16 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
     ));
   }
 
+  void _onDebouncerCalled(SearchParams? searchParams) {
+    if (isClosed) return;
+    add(const NewsListEvent.searchParamsChanged());
+  }
+
+  Future<void> _searchParamsChanged(
+      _EventOnSearchParamsChanged event, Emitter<NewsListState> emitter) async {
+    await articlesRepository.searchArticles(_searchParams.text);
+  }
+
   @override
   Future<void> close() {
     connectivitySubscription.cancel();
@@ -273,4 +291,30 @@ class NewsListBloc extends Bloc<NewsListEvent, NewsListState> {
     timer?.cancel();
     return super.close();
   }
+}
+
+@immutable
+class SearchParams {
+  const SearchParams({
+    this.text = '',
+    this.section,
+  });
+
+  final String text;
+  final Section? section;
+
+  bool get invalidSearchRequest => text.isEmpty;
+
+  SearchParams clearSection() => SearchParams(
+        text: text,
+        section: null,
+      );
+
+  SearchParams copyWith({
+    String? text,
+  }) =>
+      SearchParams(
+        text: text ?? this.text,
+        section: section ?? this.section,
+      );
 }

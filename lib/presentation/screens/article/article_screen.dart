@@ -26,11 +26,11 @@ class _ArticleScreenState extends State<ArticleScreen> {
         });
       },
       onProgress: (progress) {
-        setState(() {
-          if (mounted) {
+        if (mounted) {
+          setState(() {
             loadingPercentage = progress;
-          }
-        });
+          });
+        }
       },
       onPageFinished: (url) {
         setState(() {
